@@ -1,0 +1,112 @@
+package com.zero.plantory.global.config;
+
+import com.zero.plantory.global.security.jwt.TokenAuthenticationFilter;
+import com.zero.plantory.global.security.jwt.TokenProvider;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+
+
+@Configuration
+@EnableWebSecurity
+@EnableMethodSecurity(securedEnabled = true)
+@RequiredArgsConstructor
+public class SecurityConfig {
+
+    private final TokenProvider tokenProvider;
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .cors(Customizer.withDefaults())
+                .csrf(csrf -> csrf.disable())
+
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                "/api/auth/**",
+                                "/api/members/**",
+                                "/api/profile/**"
+                        ).permitAll()
+
+                        .requestMatchers("/api/**").authenticated()
+
+                        .anyRequest().permitAll()
+                )
+
+                .formLogin(fl -> fl.disable())
+                .rememberMe(rm -> rm.disable())
+                .logout(lo -> lo.disable())
+                .httpBasic(hb -> hb.disable())
+
+                // 403 처리
+                .exceptionHandling(ex -> ex
+                        .accessDeniedHandler((req, res, e) -> {
+                            res.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                            res.setContentType("application/json;charset=UTF-8");
+                            res.getWriter().write("{\"error\":\"권한이 없습니다.\"}");
+                        })
+                );
+
+        http.addFilterBefore(
+                new TokenAuthenticationFilter(tokenProvider),
+                UsernamePasswordAuthenticationFilter.class
+        );
+
+        return http.build();
+    }
+
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(
+            AuthenticationConfiguration authenticationConfiguration
+    ) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration config = new CorsConfiguration();
+        config.addAllowedOriginPattern("*");
+        config.addAllowedMethod("*");
+        config.addAllowedHeader("*");
+        config.setAllowCredentials(true);
+//        배포시해제 config.addAllowedOrigin("https://plantory.com");
+
+        UrlBasedCorsConfigurationSource source =
+                new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return source;
+    }
+
+    @Bean
+    public TokenAuthenticationFilter tokenAuthenticationFilter(
+            TokenProvider tokenProvider
+    ) {
+        return new TokenAuthenticationFilter(tokenProvider);
+    }
+
+}

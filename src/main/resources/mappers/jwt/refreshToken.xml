@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zero.plantory.global.security.jwt.mapper.RefreshTokenMapper">
+
+    <insert id="insertRefreshToken"
+            parameterType="com.zero.plantory.global.security.jwt.RefreshToken"
+            useGeneratedKeys="true"
+            keyProperty="refreshTokenId">
+        INSERT INTO refresh_token (member_id, refresh_token)
+        VALUES (#{memberId}, #{refreshToken})
+    </insert>
+
+    <update id="updateRefreshToken"
+            parameterType="com.zero.plantory.global.security.jwt.RefreshToken">
+        UPDATE refresh_token
+        SET refresh_token = #{refreshToken}
+        WHERE member_id = #{memberId}
+    </update>
+
+    <select id="selectByMemberId"
+            parameterType="long"
+            resultType="com.zero.plantory.global.security.jwt.RefreshToken">
+        SELECT
+            refresh_token_id,
+            member_id,
+            refresh_token
+        FROM refresh_token
+        WHERE member_id = #{memberId}
+    </select>
+
+    <select id="selectByRefreshToken"
+            parameterType="java.lang.String"
+            resultType="com.zero.plantory.global.security.jwt.RefreshToken">
+        SELECT
+            refresh_token_id,
+            member_id,
+            refresh_token
+        FROM refresh_token
+        WHERE refresh_token = #{refreshToken}
+    </select>
+
+    <delete id="deleteByMemberId"
+            parameterType="long">
+        DELETE FROM refresh_token
+        WHERE member_id = #{memberId}
+    </delete>
+
+</mapper>
