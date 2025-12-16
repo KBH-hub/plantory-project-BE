@@ -9,14 +9,20 @@
             parameterType="com.zero.plantory.global.security.jwt.RefreshToken"
             useGeneratedKeys="true"
             keyProperty="refreshTokenId">
-        INSERT INTO refresh_token (member_id, refresh_token)
-        VALUES (#{memberId}, #{refreshToken})
+        INSERT INTO refresh_token (
+            member_id,
+            refresh_token
+        )
+        VALUES (
+                   #{memberId},
+                   #{tokenHash}
+               )
     </insert>
 
     <update id="updateRefreshToken"
             parameterType="com.zero.plantory.global.security.jwt.RefreshToken">
         UPDATE refresh_token
-        SET refresh_token = #{refreshToken}
+        SET refresh_token = #{tokenHash}
         WHERE member_id = #{memberId}
     </update>
 
@@ -24,23 +30,29 @@
             parameterType="long"
             resultType="com.zero.plantory.global.security.jwt.RefreshToken">
         SELECT
-            refresh_token_id,
-            member_id,
-            refresh_token
+            refresh_token_id AS refreshTokenId,
+            member_id        AS memberId,
+            refresh_token       AS tokenHash
         FROM refresh_token
         WHERE member_id = #{memberId}
     </select>
 
-    <select id="selectByRefreshToken"
-            parameterType="java.lang.String"
+    <select id="selectByTokenHash"
+            parameterType="string"
             resultType="com.zero.plantory.global.security.jwt.RefreshToken">
         SELECT
-            refresh_token_id,
-            member_id,
-            refresh_token
+            refresh_token_id AS refreshTokenId,
+            member_id        AS memberId,
+            refresh_token       AS tokenHash
         FROM refresh_token
-        WHERE refresh_token = #{refreshToken}
+        WHERE refresh_token = #{tokenHash}
     </select>
+
+    <delete id="deleteByTokenHash"
+            parameterType="string">
+        DELETE FROM refresh_token
+        WHERE refresh_token = #{tokenHash}
+    </delete>
 
     <delete id="deleteByMemberId"
             parameterType="long">
