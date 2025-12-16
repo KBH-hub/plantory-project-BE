@@ -8,8 +8,10 @@ import com.zero.plantory.domain.message.service.MessageService;
 import com.zero.plantory.domain.message.service.MessageServiceImpl;
 import com.zero.plantory.global.dto.BoxType;
 import com.zero.plantory.global.dto.TargetType;
+import com.zero.plantory.global.security.MemberDetail;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,9 +24,9 @@ public class MessageRestController {
 
     private final MessageService messageService;
 
-    @GetMapping("/{memberId}/{boxType}")
+    @GetMapping("/{boxType}")
     public ResponseEntity<List<MessageListResponse>> getMessageList(
-            @PathVariable Long memberId,
+            @AuthenticationPrincipal MemberDetail memberDetail,
             @PathVariable BoxType boxType,
             @RequestParam(required = false) TargetType targetType,
             @RequestParam(required = false) String title,
@@ -33,7 +35,7 @@ public class MessageRestController {
     ) {
 
         MessageSearchRequest req = new MessageSearchRequest(
-                memberId, boxType, targetType, title, offset, limit
+                memberDetail.getMemberResponse().getMemberId(), boxType, targetType, title, offset, limit
         );
         return ResponseEntity.ok().body(messageService.getMessageList(req));
     }
@@ -57,7 +59,7 @@ public class MessageRestController {
         return ResponseEntity.status(400).body(Map.of("message", "delete message fail"));
     }
 
-    @GetMapping("/{messageId}")
+    @GetMapping("/detail/{messageId}")
     public ResponseEntity<MessageResponse> getMessage(@PathVariable Long messageId, @RequestParam Long viewerId) {
         MessageResponse result = messageService.findMessageDetail(messageId, viewerId);
         if(result == null) {
