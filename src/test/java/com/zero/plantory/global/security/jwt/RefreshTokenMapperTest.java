@@ -53,7 +53,7 @@ class RefreshTokenMapperTest {
     }
 
     @Test
-    void selectByRefreshToken() {
+    void selectByTokenHash() {
         // given
         RefreshToken token = new RefreshToken();
         token.setMemberId(3L);
@@ -61,7 +61,7 @@ class RefreshTokenMapperTest {
         refreshTokenMapper.insertRefreshToken(token);
 
         // when
-        RefreshToken found = refreshTokenMapper.selectByRefreshToken("select-refresh-token");
+        RefreshToken found = refreshTokenMapper.selectByTokenHash("select-refresh-token");
 
         // then
         assertThat(found).isNotNull();
