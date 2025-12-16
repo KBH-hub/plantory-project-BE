@@ -10,7 +10,7 @@ public interface RefreshTokenMapper {
     int updateRefreshToken(RefreshToken refreshToken);
     int deleteByMemberId(Long memberId);
     RefreshToken selectByMemberId(Long memberId);
-    RefreshToken selectByRefreshToken(String refreshToken);
-
+    RefreshToken selectByTokenHash(String tokenHash);
+    int deleteByTokenHash(String tokenHash);
 }
 

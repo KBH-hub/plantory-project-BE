@@ -2,13 +2,10 @@ package com.zero.plantory.global.security.jwt;
 
 import lombok.*;
 
-@ToString
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class RefreshToken {
     private Long refreshTokenId;
     private Long memberId;
-    private String refreshToken;
+    private String tokenHash;
+//    private String refreshToken;
 }
