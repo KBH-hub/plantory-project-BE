@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/sharing")
+@RequestMapping("/api/sharings")
 @RequiredArgsConstructor
 public class SharingReadRestController {
 
@@ -26,8 +26,8 @@ public class SharingReadRestController {
     }
 
     @GetMapping("/countInterest")
-    public int countInterest(@RequestParam Long memberId) {
-        return sharingReadService.countInterest(memberId);
+    public int countInterest(@AuthenticationPrincipal MemberDetail memberDetail) {
+        return sharingReadService.countInterest(memberDetail.getMemberResponse().getMemberId());
     }
 
     @GetMapping("/popular")
