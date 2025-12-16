@@ -75,4 +75,37 @@ public class AuthRestController {
         ));
     }
 
+    @GetMapping("/me")
+    public ResponseEntity<?> me(
+            @CookieValue(name = "refreshToken", required = false) String refreshToken
+    ) {
+        if (refreshToken == null) {
+            return ResponseEntity.status(401).build();
+        }
+
+        RefreshToken rt;
+        try {
+            rt = refreshTokenService.findByRefreshToken(refreshToken);
+        } catch (Exception e) {
+            return ResponseEntity.status(401).build();
+        }
+
+        Long memberId = rt.getMemberId();
+        MemberResponse member = authService.findMemberById(memberId);
+
+        String accessToken =
+                tokenProvider.createAccessToken(String.valueOf(memberId));
+
+        return ResponseEntity.ok(Map.of(
+                "user", Map.of(
+                        "memberId", member.getMemberId(),
+                        "membername", member.getMembername(),
+                        "role", member.getRole()
+                ),
+                "accessToken", accessToken
+        ));
+    }
+
+
+
 }

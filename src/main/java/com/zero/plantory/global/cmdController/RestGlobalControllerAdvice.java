@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.LockedException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -21,6 +22,15 @@ import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class RestGlobalControllerAdvice {
+
+    @ExceptionHandler(LockedException.class)
+    public ResponseEntity<Map<String, String>> handleLocked(LockedException ex,
+                                                            HttpServletRequest req) {
+        return body(HttpStatus.FORBIDDEN, "SEC-403-LOCKED",
+                "계정 정지",
+                ex.getMessage(),
+                req.getRequestURI());
+    }
 
     // 400: JSON 파싱/바인딩 실패
     @ExceptionHandler(HttpMessageNotReadableException.class)
