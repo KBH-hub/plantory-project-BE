@@ -55,6 +55,8 @@ public class AuthService {
         cookie.setPath("/");
         cookie.setMaxAge(60 * 60 * 5);
 //        cookie.setMaxAge(60 * 60 * 24 * 14);
+        cookie.setSecure(false);
+        cookie.setAttribute("SameSite", "Lax");  // 배표시 Lax --> None
         response.addCookie(cookie);
 
         return Map.of("accessToken", accessToken);
