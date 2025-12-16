@@ -1,5 +1,7 @@
 package com.zero.plantory.global.security.auth.service;
 
+import com.zero.plantory.domain.member.mapper.MemberMapper;
+import com.zero.plantory.domain.profile.dto.MemberResponse;
 import com.zero.plantory.global.security.MemberDetail;
 import com.zero.plantory.global.security.auth.dto.LoginRequest;
 import com.zero.plantory.global.security.jwt.service.RefreshTokenService;
@@ -21,6 +23,7 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final TokenProvider tokenProvider;
     private final RefreshTokenService refreshTokenService;
+    private final MemberMapper memberMapper;
 
     public Map<String, String> login(
             LoginRequest request,
@@ -55,6 +58,16 @@ public class AuthService {
         response.addCookie(cookie);
 
         return Map.of("accessToken", accessToken);
+    }
+
+    public MemberResponse findMemberById(Long memberId) {
+        MemberResponse member = memberMapper.selectByMemberId(memberId);
+
+        if (member == null) {
+            throw new IllegalArgumentException("존재하지 않는 회원");
+        }
+
+        return member;
     }
 }
 
