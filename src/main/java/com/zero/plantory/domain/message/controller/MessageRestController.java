@@ -69,7 +69,8 @@ public class MessageRestController {
     }
 
     @PostMapping("/messageRegist")
-    public ResponseEntity<Map<String, String>> registerMessage(@RequestBody MessageRequest messageRequest) {
+    public ResponseEntity<Map<String, String>> registerMessage(@RequestBody MessageRequest messageRequest, @AuthenticationPrincipal MemberDetail memberDetail) {
+        messageRequest.setSenderId(memberDetail.getMemberResponse().getMemberId());
         int result = messageService.registerMessage(messageRequest);
         if (result > 0) {
             return ResponseEntity.ok().body(Map.of("message", "regist message success"));

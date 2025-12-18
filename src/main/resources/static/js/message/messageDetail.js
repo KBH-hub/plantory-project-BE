@@ -96,12 +96,6 @@
         }
     }
 
-    function readCsrfHeaders() {
-        const token = document.querySelector('meta[name="_csrf"]')?.content;
-        const headerName = document.querySelector('meta[name="_csrf_header"]')?.content;
-        return token && headerName ? {[headerName]: token} : {};
-    }
-
     function toReplyTitle(title, {stack = false} = {}) {
         const t = String(title ?? '').trim();
         if (stack) return `Re: ${t}`;
@@ -171,7 +165,6 @@
                 await axios.post(`${apiBase}/messageRegist`, payload, {
                     headers: {
                         'Content-Type': 'application/json',
-                        ...readCsrfHeaders()
                     }
                 });
 
