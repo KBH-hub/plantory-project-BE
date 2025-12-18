@@ -24,7 +24,7 @@ class RefreshTokenMapperTest {
         // given
         RefreshToken token =  new RefreshToken();
         token.setMemberId(1L);
-        token.setRefreshToken("insert-test-token");
+        token.setTokenHash("insert-test-token");
 
         // when
         int result = refreshTokenMapper.insertRefreshToken(token);
@@ -39,7 +39,7 @@ class RefreshTokenMapperTest {
         // given
         RefreshToken token = new RefreshToken();
         token.setMemberId(2L);
-        token.setRefreshToken("select-member-token");
+        token.setTokenHash("select-member-token");
         refreshTokenMapper.insertRefreshToken(token);
 
         // when
@@ -49,7 +49,7 @@ class RefreshTokenMapperTest {
         // then
         assertThat(found).isNotNull();
         assertThat(found.getMemberId()).isEqualTo(2L);
-        assertThat(found.getRefreshToken()).isEqualTo("select-member-token");
+        assertThat(found.getTokenHash()).isEqualTo("select-member-token");
     }
 
     @Test
@@ -57,7 +57,7 @@ class RefreshTokenMapperTest {
         // given
         RefreshToken token = new RefreshToken();
         token.setMemberId(3L);
-        token.setRefreshToken("select-refresh-token");
+        token.setTokenHash("select-refresh-token");
         refreshTokenMapper.insertRefreshToken(token);
 
         // when
@@ -66,7 +66,7 @@ class RefreshTokenMapperTest {
         // then
         assertThat(found).isNotNull();
         assertThat(found.getMemberId()).isEqualTo(3L);
-        assertThat(found.getRefreshToken()).isEqualTo("select-refresh-token");
+        assertThat(found.getTokenHash()).isEqualTo("select-refresh-token");
     }
 
     @Test
@@ -74,18 +74,18 @@ class RefreshTokenMapperTest {
         // given
         RefreshToken token = new RefreshToken();
         token.setMemberId(4L);
-        token.setRefreshToken("old-token");
+        token.setTokenHash("old-token");
         refreshTokenMapper.insertRefreshToken(token);
 
         // when
-        token.setRefreshToken("new-token");
+        token.setTokenHash("new-token");
         int updated = refreshTokenMapper.updateRefreshToken(token);
 
         RefreshToken updatedToken = refreshTokenMapper.selectByMemberId(4L);
 
         // then
         assertThat(updated).isEqualTo(1);
-        assertThat(updatedToken.getRefreshToken()).isEqualTo("new-token");
+        assertThat(updatedToken.getTokenHash()).isEqualTo("new-token");
     }
 
     @Test
@@ -93,7 +93,7 @@ class RefreshTokenMapperTest {
         //given
         RefreshToken token = new RefreshToken();
         token.setMemberId(5L);
-        token.setRefreshToken("delete-token");
+        token.setTokenHash("delete-token");
         refreshTokenMapper.insertRefreshToken(token);
 
         //when
