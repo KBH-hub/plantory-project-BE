@@ -36,7 +36,8 @@ public class NoticeRestController {
     }
 
     @DeleteMapping
-    public int removeAllNotice(@RequestParam("receiverId") Long receiverId) {
+    public int removeAllNotice(@AuthenticationPrincipal MemberDetail memberDetail) {
+        Long receiverId = memberDetail.getMemberResponse().getMemberId();
         return noticeService.removeAllNotice(receiverId);
     }
 
