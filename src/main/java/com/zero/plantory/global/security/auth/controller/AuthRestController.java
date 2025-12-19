@@ -1,6 +1,8 @@
 package com.zero.plantory.global.security.auth.controller;
 
 import com.zero.plantory.domain.profile.dto.MemberResponse;
+import com.zero.plantory.global.security.auth.dto.AuthMeResponse;
+import com.zero.plantory.global.security.auth.dto.AuthUserResponse;
 import com.zero.plantory.global.security.auth.dto.LoginRequest;
 import com.zero.plantory.global.security.auth.service.AuthService;
 import com.zero.plantory.global.security.jwt.RefreshToken;
@@ -76,7 +78,7 @@ public class AuthRestController {
     }
 
     @GetMapping("/me")
-    public ResponseEntity<?> me(
+    public ResponseEntity<AuthMeResponse> me(
             @CookieValue(name = "refreshToken", required = false) String refreshToken
     ) {
         if (refreshToken == null) {
@@ -87,25 +89,41 @@ public class AuthRestController {
         try {
             rt = refreshTokenService.findByRefreshToken(refreshToken);
         } catch (Exception e) {
+            log.warn("Invalid refresh token", e);
             return ResponseEntity.status(401).build();
         }
 
         Long memberId = rt.getMemberId();
         MemberResponse member = authService.findMemberById(memberId);
 
+        if (member == null) {
+            return ResponseEntity.status(401).build();
+        }
+
         String accessToken =
                 tokenProvider.createAccessToken(String.valueOf(memberId));
 
-        return ResponseEntity.ok(Map.of(
-                "user", Map.of(
-                        "memberId", member.getMemberId(),
-                        "nickname", member.getNickname(),
-                        "membername", member.getMembername(),
-                        "role", member.getRole()
-                ),
-                "accessToken", accessToken
-        ));
+        return ResponseEntity.ok(
+                AuthMeResponse.builder()
+                        .user(
+                                AuthUserResponse.builder()
+                                        .memberId(member.getMemberId())
+                                        .membername(member.getMembername())
+                                        .nickname(member.getNickname())
+                                        .phone(member.getPhone())
+                                        .address(member.getAddress())
+                                        .sharingRate(member.getSharingRate())
+                                        .skillRate(member.getSkillRate())
+                                        .managementRate(member.getManagementRate())
+                                        .role(member.getRole())
+                                        .stopDay(member.getStopDay())
+                                        .build()
+                        )
+                        .accessToken(accessToken)
+                        .build()
+        );
     }
+
 
 
 
