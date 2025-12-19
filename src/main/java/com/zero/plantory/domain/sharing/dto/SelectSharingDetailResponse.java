@@ -34,7 +34,7 @@ public class SelectSharingDetailResponse {
     private LocalDateTime updatedAt;
 
     private List<ImageDTO> images;
-    private boolean isInterested;
+    private boolean interested;
 
     private LocalDateTime reviewFlag;
     private LocalDateTime receiverReviewFlag;

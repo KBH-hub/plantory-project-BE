@@ -37,8 +37,9 @@ public class SharingReadRestController {
 
 
     @GetMapping("/{sharingId}")
-    public SelectSharingDetailResponse getSharingDetail(@PathVariable Long sharingId) {
-        return sharingReadService.getSharingDetail(sharingId);
+    public SelectSharingDetailResponse getSharingDetail(@PathVariable Long sharingId,  @AuthenticationPrincipal MemberDetail memberDetail) {
+        Long memberId = (memberDetail != null) ? memberDetail.getMemberResponse().getMemberId() : null;
+        return sharingReadService.getSharingDetail(sharingId, memberId);
     }
 
     @GetMapping("/{sharingId}/comments")

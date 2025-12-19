@@ -131,13 +131,25 @@
             s.created_at,
             s.updated_at,
             s.review_flag,
-            s.target_member_review_flag as receiverReviewFlag
+            s.target_member_review_flag AS receiverReviewFlag,
+            CASE
+                WHEN #{memberId} IS NULL THEN FALSE
+                WHEN EXISTS (
+                    SELECT 1
+                    FROM interest i
+                    WHERE i.sharing_id = s.sharing_id
+                      AND i.member_id = #{memberId}
+                ) THEN TRUE
+                ELSE FALSE
+                END AS interested
+
         FROM sharing s
                  JOIN member mb ON s.member_id = mb.member_id
         WHERE s.sharing_id = #{sharingId}
           AND s.del_flag IS NULL
           AND mb.del_flag IS NULL
     </select>
+
 
     <select id="selectSharingComments"
             parameterType="long"

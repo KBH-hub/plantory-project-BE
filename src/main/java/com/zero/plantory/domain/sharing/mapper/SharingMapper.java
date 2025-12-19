@@ -13,7 +13,7 @@ public interface SharingMapper {
     int countInterestByMemberId(Long memberId);
     List<SharingPopularResponse> selectPopularSharingList(SharingSearchRequest request);
     int insertSharing(SharingRequest request);
-    SelectSharingDetailResponse selectSharingDetail(Long sharingId);
+    SelectSharingDetailResponse selectSharingDetail(@Param("sharingId") Long sharingId, @Param("memberId") Long memberId);
     List<SelectCommentListResponse> selectSharingComments(Long sharingId);
 
     /** click interest */

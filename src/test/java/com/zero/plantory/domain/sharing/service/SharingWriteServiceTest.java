@@ -143,13 +143,7 @@ public class SharingWriteServiceTest {
     @Order(8)
     @DisplayName("댓글 삭제")
     void deleteCommentTest() {
-        CommentRequest request = CommentRequest.builder()
-                .commentId(19L)
-                .sharingId(17L)
-                .writerId(14L)
-                .build();
-
-//        log.info("댓글 삭제 결과 = {}", sharingWriteService.deleteComment(request));
+        log.info("댓글 삭제 결과 = {}", sharingWriteService.deleteComment(25L, 22L, 21L));
     }
 
 }

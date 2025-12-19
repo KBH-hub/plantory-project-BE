@@ -38,7 +38,7 @@ public class SharingReadServiceTest {
     @Test
     @DisplayName("나눔 상세 조회")
     void getSharingDetailTest() {
-        log.info("나눔 상세 = {}", sharingReadService.getSharingDetail(4L));
+        log.info("나눔 상세 = {}", sharingReadService.getSharingDetail(4L, 2L));
     }
 
     @Test

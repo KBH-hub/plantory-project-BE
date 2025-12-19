@@ -7,6 +7,7 @@ import com.zero.plantory.global.dto.ImageTargetType;
 import com.zero.plantory.global.dto.ImageDTO;
 import com.zero.plantory.global.dto.ManageLevel;
 import com.zero.plantory.global.dto.ManageDemand;
+import org.springframework.lang.Nullable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -35,8 +36,8 @@ public class SharingReadServiceImpl implements SharingReadService {
     }
 
     @Override
-    public SelectSharingDetailResponse getSharingDetail(Long sharingId) {
-        SelectSharingDetailResponse detail = sharingMapper.selectSharingDetail(sharingId);
+    public SelectSharingDetailResponse getSharingDetail(Long sharingId, @Nullable Long memberId) {
+        SelectSharingDetailResponse detail = sharingMapper.selectSharingDetail(sharingId, memberId);
 
         if (detail == null) {
             return null;
@@ -84,7 +85,7 @@ public class SharingReadServiceImpl implements SharingReadService {
     @Override
     public ReviewInfoResponse getReviewInfo(Long sharingId, Long memberId) {
 
-        SelectSharingDetailResponse sharing = sharingMapper.selectSharingDetail(sharingId);
+        SelectSharingDetailResponse sharing = sharingMapper.selectSharingDetail(sharingId, memberId);
 
         SharingScoreServiceImpl.ReviewerType type;
 

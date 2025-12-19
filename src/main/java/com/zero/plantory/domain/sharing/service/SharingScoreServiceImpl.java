@@ -26,7 +26,7 @@ public class SharingScoreServiceImpl implements SharingScoreService {
     @Override
     public void completeSharing(Long sharingId, Long memberId, Long targetMemberId) {
 
-        SelectSharingDetailResponse sharing = sharingMapper.selectSharingDetail(sharingId);
+        SelectSharingDetailResponse sharing = sharingMapper.selectSharingDetail(sharingId, memberId);
         if (sharing == null) {
             throw new IllegalArgumentException("존재하지 않는 나눔글입니다.");
         }
@@ -68,7 +68,7 @@ public class SharingScoreServiceImpl implements SharingScoreService {
                                       int reShare,
                                       Integer satisfaction) {
 
-        SelectSharingDetailResponse sharing = sharingMapper.selectSharingDetail(sharingId);
+        SelectSharingDetailResponse sharing = sharingMapper.selectSharingDetail(sharingId, loginUserId);
 
         ReviewerType reviewerType;
 
@@ -112,7 +112,7 @@ public class SharingScoreServiceImpl implements SharingScoreService {
 
         double scaledScore = 1.0 + 13.0 * responseScore;
 
-        SelectSharingDetailResponse sharing = sharingMapper.selectSharingDetail(sharingId);
+        SelectSharingDetailResponse sharing = sharingMapper.selectSharingDetail(sharingId, memberId);
         BigDecimal baseRate = sharing.getSharingRate();
         if(baseRate == null) baseRate = new BigDecimal("7.00");
         double oldRate = baseRate.doubleValue();
@@ -125,7 +125,7 @@ public class SharingScoreServiceImpl implements SharingScoreService {
 
     private void applyCompleteScore(Long sharingId,Long memberId, int completeCount) {
 
-        SelectSharingDetailResponse sharing = sharingMapper.selectSharingDetail(sharingId);
+        SelectSharingDetailResponse sharing = sharingMapper.selectSharingDetail(sharingId, memberId);
 
         BigDecimal baseRate = sharing.getSharingRate();
         if (baseRate == null) baseRate = new BigDecimal("7.00");

@@ -11,7 +11,7 @@ public interface SharingReadService {
 
     List<SharingPopularResponse> getPopularSharingList(SharingSearchRequest request);
 
-    SelectSharingDetailResponse getSharingDetail(Long sharingId);
+    SelectSharingDetailResponse getSharingDetail(Long sharingId, Long memberId);
 
     List<SelectCommentListResponse> getSharingComments(Long sharingId);
 

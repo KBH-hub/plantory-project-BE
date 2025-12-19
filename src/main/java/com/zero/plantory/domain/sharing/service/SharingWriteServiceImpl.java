@@ -156,7 +156,7 @@ public boolean updateSharing(SharingRequest request, List<MultipartFile> newImag
         Long writerId = request.getWriterId();
         String content = request.getContent();
 
-        SelectSharingDetailResponse sharing = sharingMapper.selectSharingDetail(sharingId);
+        SelectSharingDetailResponse sharing = sharingMapper.selectSharingDetail(sharingId, null);
         if (sharing == null) {
             throw new IllegalArgumentException("존재하지 않는 나눔글입니다.");
         }
