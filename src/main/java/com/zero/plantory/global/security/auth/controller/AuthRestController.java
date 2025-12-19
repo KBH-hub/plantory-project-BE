@@ -99,6 +99,7 @@ public class AuthRestController {
         return ResponseEntity.ok(Map.of(
                 "user", Map.of(
                         "memberId", member.getMemberId(),
+                        "nickname", member.getNickname(),
                         "membername", member.getMembername(),
                         "role", member.getRole()
                 ),
