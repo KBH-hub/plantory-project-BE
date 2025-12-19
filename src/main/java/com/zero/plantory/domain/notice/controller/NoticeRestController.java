@@ -2,9 +2,11 @@ package com.zero.plantory.domain.notice.controller;
 
 import com.zero.plantory.domain.notice.service.NoticeService;
 import com.zero.plantory.global.dto.NoticeDTO;
+import com.zero.plantory.global.security.MemberDetail;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +20,8 @@ public class NoticeRestController {
     NoticeService noticeService;
 
     @GetMapping
-    public List<NoticeDTO> getNoticeByReceiver(@RequestParam("receiverId") Long receiverId) {
+    public List<NoticeDTO> getNoticeByReceiver(@AuthenticationPrincipal MemberDetail memberDetail) {
+        Long receiverId = memberDetail.getMemberResponse().getMemberId();
         return noticeService.getNoticeByReceiver(receiverId);
     }
 
@@ -33,7 +36,8 @@ public class NoticeRestController {
     }
 
     @DeleteMapping
-    public int removeAllNotice(@RequestParam("receiverId") Long receiverId) {
+    public int removeAllNotice(@AuthenticationPrincipal MemberDetail memberDetail) {
+        Long receiverId = memberDetail.getMemberResponse().getMemberId();
         return noticeService.removeAllNotice(receiverId);
     }
 
