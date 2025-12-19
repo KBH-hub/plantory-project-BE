@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/sharing")
+@RequestMapping("/api/sharings")
 @RequiredArgsConstructor
 public class SharingWriteRestController {
 
@@ -102,32 +102,32 @@ public class SharingWriteRestController {
     }
 
 
-    @PutMapping("/comments/{commentId}")
+    @PutMapping("/{sharingId}/comments/{commentId}")
     public ResponseEntity<?> updateComment(
+            @PathVariable Long sharingId,
             @PathVariable Long commentId,
             @AuthenticationPrincipal MemberDetail memberDetail,
             @RequestBody CommentRequest request
     ) {
         request.setCommentId(commentId);
         request.setWriterId(memberDetail.getMemberResponse().getMemberId());
+        request.setSharingId(sharingId);
 
         boolean result = sharingWriteService.updateComment(request);
         return ResponseEntity.ok(result);
     }
 
 
-    @DeleteMapping("/comments/{commentId}")
+    @DeleteMapping("/{sharingId}/comments/{commentId}")
     public ResponseEntity<?> deleteComment(
             @PathVariable Long commentId,
-            @AuthenticationPrincipal MemberDetail memberDetail,
-            @RequestBody CommentRequest request
+            @PathVariable Long sharingId,
+            @AuthenticationPrincipal MemberDetail memberDetail
     ) {
         Long loginMemberId = memberDetail.getMemberResponse().getMemberId();
 
-        request.setCommentId(commentId);
-        request.setWriterId(loginMemberId);
 
-        boolean result = sharingWriteService.deleteComment(request);
+        boolean result = sharingWriteService.deleteComment(commentId, sharingId, loginMemberId);
         return ResponseEntity.ok(result);
     }
 

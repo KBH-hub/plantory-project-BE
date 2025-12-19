@@ -28,7 +28,7 @@ public interface SharingMapper {
     int insertComment(@Param("sharingId") Long sharingId, @Param("writerId") Long writerId, @Param("content") String content);
     int countProfileComment(@Param("commentId") Long commentId, @Param("sharingId") Long sharingId, @Param("writerId") Long writerId);
     int updateCommentById(CommentRequest request);
-    int deleteComment(CommentRequest request);
+    int deleteComment(Long commentId, Long sharingId, Long writerId);
 
     /**updateRefreshToken sharing*/
     int countProfileSharing(@Param("sharingId") Long sharingId, @Param("memberId") Long memberId);

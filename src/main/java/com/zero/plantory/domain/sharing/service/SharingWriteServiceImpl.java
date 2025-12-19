@@ -198,14 +198,14 @@ public boolean updateSharing(SharingRequest request, List<MultipartFile> newImag
 
     @Override
     @Transactional
-    public boolean deleteComment(CommentRequest request) {
+    public boolean deleteComment(Long commentId, Long sharingId, Long writerId) {
 
-        int isMine = sharingMapper.countProfileComment(request.getCommentId(), request.getSharingId(), request.getWriterId());
+        int isMine = sharingMapper.countProfileComment(commentId, sharingId, writerId);
         if (isMine == 0) {
             throw new IllegalStateException("본인 댓글만 삭제 가능");
         }
 
-        return sharingMapper.deleteComment(request) > 0;
+        return sharingMapper.deleteComment(commentId, sharingId, writerId) > 0;
     }
 
 
