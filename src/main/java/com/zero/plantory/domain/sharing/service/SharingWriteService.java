@@ -22,6 +22,6 @@ public interface SharingWriteService {
 
     boolean updateComment(CommentRequest request);
 
-    boolean deleteComment(CommentRequest request);
+    boolean deleteComment(Long sharingId, Long commentId, Long writerId);
 
 }

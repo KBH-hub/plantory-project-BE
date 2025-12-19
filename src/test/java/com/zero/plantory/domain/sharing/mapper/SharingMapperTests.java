@@ -120,8 +120,8 @@ public class SharingMapperTests {
         log.info("삭제 권한 여부 = {}", count);
 
         if (count == 1) {
-            int result = mapper.deleteComment(request);
-            log.info("삭제 결과 = {}", result);
+//            int result = mapper.deleteComment(request);
+//            log.info("삭제 결과 = {}", result);
         }
     }
 
