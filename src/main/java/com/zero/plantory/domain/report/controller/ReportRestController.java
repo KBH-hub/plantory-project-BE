@@ -3,9 +3,11 @@ package com.zero.plantory.domain.report.controller;
 import com.zero.plantory.domain.report.dto.NameListResponse;
 import com.zero.plantory.domain.report.dto.ReportRequest;
 import com.zero.plantory.domain.report.service.ReportService;
+import com.zero.plantory.global.security.MemberDetail;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,7 +22,8 @@ public class ReportRestController {
     private final ReportService reportService;
 
     @GetMapping("/users")
-    public ResponseEntity<List<NameListResponse>> searchUserByNickname(@RequestParam String nickname, @RequestParam Long viewerId) {
+    public ResponseEntity<List<NameListResponse>> searchUserByNickname(@RequestParam String nickname, @AuthenticationPrincipal MemberDetail memberDetail) {
+        Long viewerId = memberDetail.getMemberResponse().getMemberId();
         return ResponseEntity.ok().body(reportService.getUsersIdByNickname(nickname, viewerId));
     }
 
