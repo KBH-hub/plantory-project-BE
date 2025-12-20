@@ -1,6 +1,6 @@
 package com.zero.plantoryprojectbe.profile.service;
 
-import com.zero.plantoryprojectbe.global.security.jwt.service.RefreshTokenService;
+import com.zero.plantoryprojectbe.auth.service.RefreshTokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

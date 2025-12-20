@@ -1,6 +1,6 @@
 package com.zero.plantoryprojectbe.global.cmdController;
 
-import com.zero.plantoryprojectbe.auth.service.AuthService;
+import com.zero.plantoryprojectbe.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class CmdController {
 
-    final AuthService authService;
+    final MemberService memberService;
 
     @RequestMapping("/")
     public String index(){

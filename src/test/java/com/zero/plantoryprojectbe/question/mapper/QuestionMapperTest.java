@@ -4,12 +4,15 @@ import com.zero.plantoryprojectbe.question.QuestionMapper;
 import com.zero.plantoryprojectbe.question.dto.AnswerRequest;
 import com.zero.plantoryprojectbe.question.dto.QuestionRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
+@Transactional
 @SpringBootTest
 public class QuestionMapperTest {
 
@@ -93,15 +96,24 @@ public class QuestionMapperTest {
     @Test
     @DisplayName("답글 등록")
     void insertAnswerTest() {
+        QuestionRequest questionRequest = QuestionRequest.builder()
+                .memberId(1L)
+                .title("테스트 질문")
+                .content("테스트 질문 내용")
+                .build();
+        Long questionId = (long) mapper.insertQuestion(questionRequest);
 
         AnswerRequest request = AnswerRequest.builder()
-                .questionId(21L)
+                .questionId(questionId)
                 .writerId(1L)
                 .content("답글 등록 테스트")
                 .build();
 
-        log.info("답글 등록 결과 = {}", mapper.insertAnswer(request));  // 1 → 성공
+        int result = mapper.insertAnswer(request);
+        log.info("답글 등록 결과 = {}", result);
+        Assertions.assertEquals(1, result);
     }
+
 
     @Test
     @DisplayName("질문 답글 상세 조회")
