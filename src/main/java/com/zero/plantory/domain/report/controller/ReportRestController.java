@@ -3,9 +3,11 @@ package com.zero.plantory.domain.report.controller;
 import com.zero.plantory.domain.report.dto.NameListResponse;
 import com.zero.plantory.domain.report.dto.ReportRequest;
 import com.zero.plantory.domain.report.service.ReportService;
+import com.zero.plantory.global.security.MemberDetail;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,15 +22,19 @@ public class ReportRestController {
     private final ReportService reportService;
 
     @GetMapping("/users")
-    public ResponseEntity<List<NameListResponse>> searchUserByNickname(@RequestParam String nickname, @RequestParam Long viewerId) {
+    public ResponseEntity<List<NameListResponse>> searchUserByNickname(@RequestParam String nickname, @AuthenticationPrincipal MemberDetail memberDetail) {
+        Long viewerId = memberDetail.getMemberResponse().getMemberId();
         return ResponseEntity.ok().body(reportService.getUsersIdByNickname(nickname, viewerId));
     }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Map<String,String>> registerReport(
             @ModelAttribute ReportRequest request,                 // 폼 필드 → 객체 바인딩
-            @RequestParam("files") List<MultipartFile> files       // key 이름: files
+            @RequestParam("files") List<MultipartFile> files,       // key 이름: files
+            @AuthenticationPrincipal MemberDetail memberDetail
     ) throws IOException {
+        Long repoterId = memberDetail.getMemberResponse().getMemberId();
+        request.setReporterId(repoterId);
         int saved = reportService.registerReport(request, files);
         int expected = (files == null ? 0 : files.size()) + 1;     // report 1건 + 이미지 N건 = 총 등록 건수
         if (saved == expected) {
