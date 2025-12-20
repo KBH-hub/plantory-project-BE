@@ -13,10 +13,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 @SpringBootTest
+@Transactional
 @Slf4j
 class MessageServiceTest {
 
@@ -75,29 +79,20 @@ class MessageServiceTest {
     }
 
     @Test
-    @DisplayName("메시지 전송 처리")
-    void registerMessageTest() {
+    @DisplayName("메시지 전송 성공")
+    void registerMessageSuccessTest() {
         MessageRequest request = MessageRequest.builder()
-                .senderId(3L)
-                .receiverId(8L)
+                .senderId(1L)
+                .receiverId(2L)
                 .title("test")
                 .content("테스트 쪽지 내용입니다.")
                 .targetType(MessageTargetType.SHARING)
-                .targetId(13L)
+                .targetId(3L)
                 .build();
 
-        boolean result;
-        try {
-            messageService.registerMessage(request);
-            result = true;
-        } catch (IllegalArgumentException e) {
-            result = false;
-        }
-
-        Assertions.assertFalse(result);
-
-        log.info(String.valueOf(result));
+        assertDoesNotThrow(() -> messageService.registerMessage(request));
     }
+
 
     @Test
     @DisplayName("메시지 전송 실패 (제목 누락)처리")
@@ -163,7 +158,7 @@ class MessageServiceTest {
     @Test
     @DisplayName("수신자 메시지 상세 정보 조회 시 읽음 처리")
     void receiverFindMessageDetailTest() {
-        Long messageId = 6L;
+        Long messageId = 1L;
         Long viewerId = 1L;
 
         MessageResponse result = messageService.findMessageDetail(messageId, viewerId);

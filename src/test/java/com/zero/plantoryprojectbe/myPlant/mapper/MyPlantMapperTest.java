@@ -8,11 +8,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.List;
 
 @SpringBootTest
+@Transactional
 @Slf4j
 class MyPlantMapperTest {
 
@@ -36,7 +38,7 @@ class MyPlantMapperTest {
     @DisplayName("나의 식물 등록 처리")
     void insertMyPlantTest() {
         MyPlantRequest vo  = MyPlantRequest.builder()
-                .memberId(4L)
+                .memberId(1L)
                 .myplantId(1L)
                 .name("테스트마이플랜트명")
                 .type("테스트마이플랜트타입")

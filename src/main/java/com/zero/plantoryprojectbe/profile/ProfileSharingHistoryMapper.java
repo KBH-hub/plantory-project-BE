@@ -12,13 +12,8 @@ public interface ProfileSharingHistoryMapper {
     int countByInterestCount(@Param("memberId") Long memberId);
     int countByCompletedSharingCount(@Param("memberId") Long memberId);
     List<ProfileSharingHistoryListResponse> selectProfileSharingList(ProfileSharingHistoryListRequest request);
-
     List<ProfileSharingHistoryListResponse> selectMySharingList(ProfileSharingHistoryListRequest request);
-
     List<ProfileSharingHistoryListResponse> selectReceivedSharingList(ProfileSharingHistoryListRequest request);
 
-    int countReceivedSharing(ProfileSharingHistoryListRequest req);
-
-    int countMySharing(ProfileSharingHistoryListRequest req);
 }
 

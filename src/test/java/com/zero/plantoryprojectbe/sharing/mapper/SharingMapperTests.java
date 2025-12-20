@@ -13,10 +13,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
 @Slf4j
+@Transactional
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SharingMapperTests {
@@ -25,7 +27,7 @@ public class SharingMapperTests {
     SharingMapper mapper;
 
     private final Long memberId = 1L;
-    private final Long sharingId = 20L;
+    private final Long sharingId = 1L;
     private final Long writerId = 1L;
 
     @Test
@@ -194,7 +196,7 @@ public class SharingMapperTests {
     @Test
     @DisplayName("나눔 게시글 상세조회")
     void selectSharingDetailTest() {
-        log.info("readSharingDetail = {}", mapper.selectSharingDetail(2L));
+        log.info("readSharingDetail = {}", mapper.selectSharingDetail(2L,null));
 
     }
 

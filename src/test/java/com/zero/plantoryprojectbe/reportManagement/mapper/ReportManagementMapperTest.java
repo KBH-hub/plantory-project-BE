@@ -9,18 +9,20 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @SpringBootTest
 @Slf4j
+@Transactional
 class ReportManagementMapperTest {
 
     @Autowired
     ReportManagementMapper reportManagementMapper;
 
     @Test
-    @DisplayName("신고 관리 화면 - 일반 조회")
+    @DisplayName("일반 조회")
     void selectReportListTest() {
         ReportManagementSearchRequest vo = ReportManagementSearchRequest.builder()
                 .limit(10)
@@ -33,7 +35,7 @@ class ReportManagementMapperTest {
     }
 
     @Test
-    @DisplayName("신고 관리 화면 - 신고 내용으로 검색")
+    @DisplayName("신고 내용으로 검색")
     void selectReportListByKeywordTest() {
         ReportManagementSearchRequest vo = ReportManagementSearchRequest.builder()
                 .keyword("약속")
@@ -48,7 +50,7 @@ class ReportManagementMapperTest {
     }
 
     @Test
-    @DisplayName("신고 관리 화면 - 처리 완료 필터링 조회")
+    @DisplayName("처리 완료 필터링 조회")
     void selectReportListByStatusTest() {
         ReportManagementSearchRequest vo = ReportManagementSearchRequest.builder()
                 .keyword(null)
@@ -86,8 +88,8 @@ class ReportManagementMapperTest {
     @DisplayName("처리 의견 입력")
     void insertAdminMemoTest() {
         ReportManagementResponse vo = ReportManagementResponse.builder()
-                Id(18L)
-                Memo("조치하였습니다")
+                .reportId(18L)
+                .adminMemo("조치하였습니다")
                 .status("true")
                 .reportId(7L)
                 .build();

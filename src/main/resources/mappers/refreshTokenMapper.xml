@@ -3,10 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.zero.plantoryprojectbe.global.security.jwt.RefreshTokenMapper">
+<mapper namespace="com.zero.plantoryprojectbe.auth.RefreshTokenMapper">
 
     <insert id="insertRefreshToken"
-            parameterType="com.zero.plantoryprojectbe.global.security.jwt.RefreshToken"
+            parameterType="com.zero.plantoryprojectbe.auth.dto.RefreshTokenRequest"
             useGeneratedKeys="true"
             keyProperty="refreshTokenId">
         INSERT INTO refresh_token (
@@ -20,7 +20,7 @@
     </insert>
 
     <update id="updateRefreshToken"
-            parameterType="com.zero.plantoryprojectbe.global.security.jwt.RefreshToken">
+            parameterType="com.zero.plantoryprojectbe.auth.dto.RefreshTokenRequest">
         UPDATE refresh_token
         SET refresh_token = #{tokenHash}
         WHERE member_id = #{memberId}
@@ -28,7 +28,7 @@
 
     <select id="selectByMemberId"
             parameterType="long"
-            resultType="com.zero.plantoryprojectbe.global.security.jwt.RefreshToken">
+            resultType="com.zero.plantoryprojectbe.auth.dto.RefreshTokenRequest">
         SELECT
             refresh_token_id AS refreshTokenId,
             member_id        AS memberId,
@@ -39,7 +39,7 @@
 
     <select id="selectByTokenHash"
             parameterType="string"
-            resultType="com.zero.plantoryprojectbe.global.security.jwt.RefreshToken">
+            resultType="com.zero.plantoryprojectbe.auth.dto.RefreshTokenRequest">
         SELECT
             refresh_token_id AS refreshTokenId,
             member_id        AS memberId,
