@@ -1,0 +1,22 @@
+package com.zero.plantoryprojectbe.plantingCalendar.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class DiaryResponse {
+    Long diaryId;
+    Long myplantId;
+    String name;
+    String activity;
+    String state;
+    String memo;
+    LocalDateTime createdAt;
+}
