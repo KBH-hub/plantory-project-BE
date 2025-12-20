@@ -109,7 +109,7 @@ class MyPlantServiceTest {
         MyPlantRequest request = MyPlantRequest.builder()
                 .memberId(1L)
                 .myplantId(1L)
-                .name("수정테스트식물"
+                .name("수정테스트식물")
                 .type("수정테스트마이플랜트타입")
                 .startAt(Timestamp.valueOf("2025-10-01 00:00:00").toLocalDateTime())
                 .endDate(Timestamp.valueOf("2025-11-01 00:00:00").toLocalDateTime())
