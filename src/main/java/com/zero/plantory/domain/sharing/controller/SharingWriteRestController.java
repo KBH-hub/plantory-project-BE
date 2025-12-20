@@ -27,9 +27,10 @@ public class SharingWriteRestController {
 
     @PostMapping
     public ResponseEntity<?> createSharing(
+            @AuthenticationPrincipal MemberDetail memberDetail,
             @ModelAttribute SharingRequest request,
             @RequestParam(value = "files", required = false) List<MultipartFile> files) throws IOException {
-
+        request.setMemberId(memberDetail.getMemberResponse().getMemberId());
         Long sharingId = sharingWriteService.registerSharing(request, files);
         return ResponseEntity.ok(sharingId);
     }
