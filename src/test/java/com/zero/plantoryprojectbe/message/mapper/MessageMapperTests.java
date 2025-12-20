@@ -13,10 +13,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @SpringBootTest
+@Transactional
 @Slf4j
 public class MessageMapperTests {
     @Autowired
@@ -123,8 +125,8 @@ public class MessageMapperTests {
     void insertMessageTest() {
         new MessageRequest();
         MessageRequest dto = MessageRequest.builder()
-                .senderId(3L)
-                .receiverId(8L)
+                .senderId(1L)
+                .receiverId(2L)
                 .title("안녕하세요. 테스트 쪽지 제목입니다.")
                 .content("테스트 쪽지 내용입니다.")
                 .targetType(MessageTargetType.SHARING)

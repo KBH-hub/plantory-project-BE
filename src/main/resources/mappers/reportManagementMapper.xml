@@ -19,20 +19,17 @@
         </where>
     </select>
 
-
-
     <select id="selectReportList"
             parameterType="com.zero.plantoryprojectbe.reportManagement.dto.ReportManagementSearchRequest"
             resultType="com.zero.plantoryprojectbe.reportManagement.dto.ReportManagementResponse">
         SELECT
         r.report_id,
-        r_id,
         r.reporter_id,
         r.target_member_id,
         r.content,
         r.status,
         r.created_at,
-        r_memo,
+        r.admin_memo,
         r.del_flag
         FROM report r
         <where>
@@ -57,24 +54,23 @@
             #{id}
         </foreach>
     </update>
-    
+
     <select id="selectReportDetail" resultType="com.zero.plantoryprojectbe.reportManagement.dto.ReportManagementDetailResponse">
         SELECT
             r.report_id,
-            r_id,
             r.reporter_id,
             r.target_member_id,
-            reporter.membername reporter_name,
-            target.membername   target_name,
-            admin.membername    admin_name,
+            reporter.membername AS reporter_name,
+            target.membername AS target_name,
+            admin.membername AS admin_name,
             r.content,
             r.status,
             r.created_at,
-            r_memo
+            r.admin_memo
         FROM report r
                  JOIN member reporter ON r.reporter_id = reporter.member_id
                  JOIN member target   ON r.target_member_id = target.member_id
-                 LEFT JOIN member admin ON r_id = admin.member_id
+                 LEFT JOIN member admin ON r.admin_id = admin.member_id
         WHERE r.report_id = #{reportId}
           AND r.del_flag IS NULL
     </select>

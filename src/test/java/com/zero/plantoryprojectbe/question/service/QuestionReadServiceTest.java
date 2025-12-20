@@ -7,8 +7,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
+@Transactional
 @Slf4j
 public class QuestionReadServiceTest {
 
@@ -26,7 +28,7 @@ public class QuestionReadServiceTest {
     @DisplayName("질문 상세 + 이미지 조회")
     void questionDetailTest() {
 
-        Long questionId = 2L;
+        Long questionId = 5L;
 
         SelectQuestionDetailResponse vo = questionReadService.getQuestionDetail(questionId);
 

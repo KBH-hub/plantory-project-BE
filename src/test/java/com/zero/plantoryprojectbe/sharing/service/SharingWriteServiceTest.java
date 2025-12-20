@@ -9,11 +9,13 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 @SpringBootTest
+@Transactional
 @Slf4j
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SharingWriteServiceTest {
@@ -44,7 +46,7 @@ public class SharingWriteServiceTest {
         List<MultipartFile> fileList = List.of(file1, file2);
 
         SharingRequest request = SharingRequest.builder()
-                .memberId(1L)
+                .memberId(1L)           // DB에 있는 member_id
                 .title("테스트 글")
                 .content("테스트 내용")
                 .plantType("다육이")
@@ -56,10 +58,10 @@ public class SharingWriteServiceTest {
         log.info("등록된 글 ID = {}", id);
     }
 
-    /** 2. 나눔글 수정 */
+    /** 2. 나눔글 수정 (이미지 변경 포함) */
     @Test
     @Order(2)
-    @DisplayName("나눔글 수정 (이미지 변경 포함)")
+    @DisplayName("나눔글 수정")
     void updateSharingTest() throws Exception {
 
         MockMultipartFile newMockFile = new MockMultipartFile(
@@ -70,18 +72,16 @@ public class SharingWriteServiceTest {
         );
 
         SharingRequest request = SharingRequest.builder()
-                .sharingId(17L)
-                .memberId(18L)
+                .sharingId(3L)           // DB에 있는 sharing_id
+                .memberId(1L)            // DB에 있는 member_id
                 .title("수정된 제목")
                 .content("수정된 내용")
-                .content("테스트 내용")
                 .plantType("다육이")
                 .managementLevel(ManageLevel.EASY)
                 .managementNeeds(ManageDemand.LITTLE_CARE)
                 .build();
 
         boolean result = sharingWriteService.updateSharing(request, List.of(newMockFile));
-
         log.info("수정 결과 = {}", result);
     }
 
@@ -90,7 +90,7 @@ public class SharingWriteServiceTest {
     @Order(3)
     @DisplayName("나눔글 삭제")
     void deleteSharingTest() {
-        log.info("삭제 결과 = {}", sharingWriteService.deleteSharing(30L, 1L));
+        log.info("삭제 결과 = {}", sharingWriteService.deleteSharing(3L, 1L)); // DB 기준
     }
 
     /** 4. 관심 등록 */
@@ -98,7 +98,7 @@ public class SharingWriteServiceTest {
     @Order(4)
     @DisplayName("관심 등록")
     void addInterestTest() {
-        log.info("관심 등록 결과 = {}", sharingWriteService.addInterest(1L, 12L));
+        log.info("관심 등록 결과 = {}", sharingWriteService.addInterest(1L, 1L));
     }
 
     /** 5. 관심 해제 */
@@ -106,7 +106,7 @@ public class SharingWriteServiceTest {
     @Order(5)
     @DisplayName("관심 해제")
     void removeInterestTest() {
-        log.info("관심 해제 결과 = {}", sharingWriteService.removeInterest(1L, 12L));
+        log.info("관심 해제 결과 = {}", sharingWriteService.removeInterest(3L, 12L));
     }
 
     /** 6. 댓글 등록 */
@@ -115,9 +115,9 @@ public class SharingWriteServiceTest {
     @DisplayName("댓글 등록")
     void addCommentTest() {
         CommentRequest request = CommentRequest.builder()
-                .commentId(19L)
-                .sharingId(17L)
-                .writerId(14L)
+                .commentId(1L)           // DB에 있는 comment_id
+                .sharingId(3L)           // DB에 있는 sharing_id
+                .writerId(2L)            // DB에 있는 writer_id
                 .content("댓글")
                 .build();
         log.info("댓글 등록 결과 = {}", sharingWriteService.addComment(request));
@@ -129,12 +129,11 @@ public class SharingWriteServiceTest {
     @DisplayName("댓글 수정")
     void updateCommentTest() {
         CommentRequest request = CommentRequest.builder()
-                .commentId(19L)
-                .sharingId(17L)
-                .writerId(14L)
+                .commentId(1L)           // DB 기준
+                .sharingId(1L)
+                .writerId(2L)
                 .content("수정된 댓글")
                 .build();
-
         log.info("댓글 수정 결과 = {}", sharingWriteService.updateComment(request));
     }
 
@@ -143,7 +142,6 @@ public class SharingWriteServiceTest {
     @Order(8)
     @DisplayName("댓글 삭제")
     void deleteCommentTest() {
-        log.info("댓글 삭제 결과 = {}", sharingWriteService.deleteComment(25L, 22L, 21L));
+        log.info("댓글 삭제 결과 = {}", sharingWriteService.deleteComment(1L, 3L, 2L));
     }
-
 }

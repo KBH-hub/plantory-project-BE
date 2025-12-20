@@ -6,16 +6,19 @@ import com.zero.plantoryprojectbe.plantingCalendar.dto.DiaryResponse;
 import com.zero.plantoryprojectbe.plantingCalendar.dto.MyPlantDiaryResponse;
 import com.zero.plantoryprojectbe.plantingCalendar.dto.PlantingCalendarResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @SpringBootTest
+@Transactional
 @Slf4j
 class PlantingCalendarMapperTest {
     @Autowired
@@ -141,17 +144,21 @@ class PlantingCalendarMapperTest {
     @Test
     @DisplayName("관찰일지 등록 처리")
     void insertDiaryTest() {
-        DiaryRequest dto = DiaryRequest.builder()
-                .myplantId(21L)
+        Long existingMyPlantId = 1L;
+
+        DiaryRequest diaryRequest = DiaryRequest.builder()
+                .myplantId(existingMyPlantId) // null 아님
                 .activity("열매 등록하기")
                 .state("좋음")
                 .memo("메모 내용")
+                .createdAt(LocalDateTime.now())
                 .build();
 
-        int result = plantingCalendarMapper.insertDiary(dto);
+        int result = plantingCalendarMapper.insertDiary(diaryRequest);
 
-        log.info(String.valueOf(result));
+        Assertions.assertEquals(1, result);
     }
+
 
     @Test
     void deleteDiary() {

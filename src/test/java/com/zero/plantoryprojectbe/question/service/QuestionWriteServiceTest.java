@@ -7,13 +7,15 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 @SpringBootTest
 @Slf4j
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)   // ⭐ 순서 강제
+@Transactional
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)   // ⭐ 순서 강제 - 줄여서 순강
 public class QuestionWriteServiceTest {
 
     @Autowired
