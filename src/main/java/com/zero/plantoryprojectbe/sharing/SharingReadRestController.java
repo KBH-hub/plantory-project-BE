@@ -48,8 +48,9 @@ public class SharingReadRestController {
     @GetMapping("/{sharingId}/partners")
     public List<SharingPartnerResponse> getMessagePartners(
             @PathVariable Long sharingId,
-            @RequestParam Long receiverId
+            @AuthenticationPrincipal MemberDetail memberDetail
     ) {
+        Long receiverId = memberDetail.memberResponse().getMemberId();
         return sharingReadService.getMessagePartners(receiverId, sharingId);
     }
 

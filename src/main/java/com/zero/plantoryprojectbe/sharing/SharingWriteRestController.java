@@ -37,9 +37,11 @@ public class SharingWriteRestController {
     public ResponseEntity<?> updateSharing(
             @PathVariable Long sharingId,
             @ModelAttribute SharingRequest request,
+            @AuthenticationPrincipal MemberDetail memberDetail,
             @RequestParam(value = "files", required = false) List<MultipartFile> files) throws IOException {
 
         request.setSharingId(sharingId);
+        request.setMemberId(memberDetail.memberResponse().getMemberId());
 
         if (request.getDeletedImageIds() != null && !request.getDeletedImageIds().isBlank()) {
             ObjectMapper mapper = new ObjectMapper();
