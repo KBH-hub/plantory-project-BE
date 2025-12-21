@@ -21,9 +21,12 @@
 
     <update id="updateProfileInfo" parameterType="com.zero.plantoryprojectbe.profile.dto.ProfileUpdateRequest">
         UPDATE member
-        SET nickname = #{nickname},
-            phone = #{phone},
-            address = #{address}
+        <set>
+            <if test="nickname != null">nickname = #{nickname},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="noticeEnabled != null">notice_enabled = #{noticeEnabled},</if>
+        </set>
         WHERE member_id = #{memberId}
     </update>
 
