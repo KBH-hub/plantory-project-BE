@@ -171,7 +171,7 @@ public class SharingScoreServiceImpl implements SharingScoreService {
      */
     private double getMannerWeight(int manner) {
         return switch (manner) {
-            case 1 -> 1.05;   // 만족
+            case 1 -> 1.01;   // 만족
             case 2 -> 1.00;   // 보통
             case 3 -> 0.95;   // 불만족
             default -> 1.00;
@@ -179,12 +179,12 @@ public class SharingScoreServiceImpl implements SharingScoreService {
     }
 
     private double getReShareWeight(int reShare) {
-        return reShare == 1 ? 1.03 : 0.97;
+        return reShare == 1 ? 1.02 : 0.97;
     }
 
     private double getSatisfactionWeight(Integer sat) {
         return switch (sat) {
-            case 1 -> 1.05;
+            case 1 -> 1.01;
             case 2 -> 1.00;
             case 3 -> 0.95;
             default -> 1.00;
