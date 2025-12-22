@@ -228,9 +228,9 @@
 
         SELECT
         a.answer_id   AS id,
-        a.question_id AS target_id,    <!-- 핵심: 원글 id -->
-        a.writer_id   AS member_id,    <!-- 답글 작성자 -->
-        mw.nickname   AS nickname,     <!-- 답글 작성자 닉네임 -->
+        a.question_id AS target_id,
+        a.writer_id   AS member_id,
+        mw.nickname   AS nickname,
         q.title       AS title,
         a.created_at  AS created_at,
         'ANSWER'      AS category
