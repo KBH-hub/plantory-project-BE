@@ -1,6 +1,6 @@
 package com.zero.plantoryprojectbe.notice.service;
 
-import com.zero.plantoryprojectbe.global.dto.NoticeDTO;
+import com.zero.plantoryprojectbe.notice.dto.NoticeDTO;
 
 import java.util.List;
 

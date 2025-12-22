@@ -1,6 +1,6 @@
 package com.zero.plantoryprojectbe.question.service;
 
-import com.zero.plantoryprojectbe.global.dto.ImageDTO;
+import com.zero.plantoryprojectbe.image.dto.ImageDTO;
 import com.zero.plantoryprojectbe.global.dto.ImageTargetType;
 import com.zero.plantoryprojectbe.image.ImageMapper;
 import com.zero.plantoryprojectbe.question.QuestionMapper;

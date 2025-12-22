@@ -1,5 +1,6 @@
-package com.zero.plantoryprojectbe.global.dto;
+package com.zero.plantoryprojectbe.notice.dto;
 
+import com.zero.plantoryprojectbe.global.dto.NoticeTargetType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
