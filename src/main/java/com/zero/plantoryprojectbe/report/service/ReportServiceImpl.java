@@ -1,6 +1,6 @@
 package com.zero.plantoryprojectbe.report.service;
 
-import com.zero.plantoryprojectbe.global.dto.ImageDTO;
+import com.zero.plantoryprojectbe.image.dto.ImageDTO;
 import com.zero.plantoryprojectbe.global.dto.ImageTargetType;
 import com.zero.plantoryprojectbe.global.utils.StorageUploader;
 import com.zero.plantoryprojectbe.image.ImageMapper;

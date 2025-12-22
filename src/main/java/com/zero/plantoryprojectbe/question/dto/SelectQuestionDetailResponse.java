@@ -1,6 +1,6 @@
 package com.zero.plantoryprojectbe.question.dto;
 
-import com.zero.plantoryprojectbe.global.dto.ImageDTO;
+import com.zero.plantoryprojectbe.image.dto.ImageDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

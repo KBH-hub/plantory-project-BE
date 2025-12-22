@@ -1,6 +1,6 @@
 package com.zero.plantoryprojectbe.plantingCalendar.service;
 
-import com.zero.plantoryprojectbe.global.dto.ImageDTO;
+import com.zero.plantoryprojectbe.image.dto.ImageDTO;
 import com.zero.plantoryprojectbe.global.dto.ImageTargetType;
 import com.zero.plantoryprojectbe.plantingCalendar.dto.*;
 import lombok.extern.slf4j.Slf4j;
