@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,7 +19,7 @@ public class ProfileInfoResponse {
     private String address;
     private String role;
     private Integer noticeEnabled;
-    private Integer sharingRate;
+    private BigDecimal sharingRate;
     private String delFlag;
 }
 

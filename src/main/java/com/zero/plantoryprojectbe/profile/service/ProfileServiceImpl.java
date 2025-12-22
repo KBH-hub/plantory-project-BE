@@ -11,6 +11,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -24,7 +26,7 @@ public class ProfileServiceImpl implements ProfileService {
         ProfileInfoResponse myInfoResult = profileMapper.selectProfileInfo(memberId);
 
         if (myInfoResult.getSharingRate() == null) {
-            myInfoResult.setSharingRate(0);
+            myInfoResult.setSharingRate(BigDecimal.valueOf(0));
         }
 
         return myInfoResult;
