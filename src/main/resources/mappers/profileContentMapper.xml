@@ -209,15 +209,15 @@
         FROM (
         SELECT
         c.comment_id AS id,
-        c.sharing_id AS member_id,
-        c.writer_id,
-        c.created_at,
-        s.title,
-        m.nickname,
-        'COMMENT' AS category
+        c.sharing_id AS target_id,     <!-- 핵심: 원글 id -->
+        c.writer_id  AS member_id,     <!-- 댓글 작성자 -->
+        mw.nickname  AS nickname,      <!-- 댓글 작성자 닉네임 -->
+        s.title      AS title,
+        c.created_at AS created_at,
+        'COMMENT'    AS category
         FROM comment c
         JOIN sharing s ON c.sharing_id = s.sharing_id
-        JOIN member m ON s.member_id = m.member_id
+        JOIN member mw ON mw.member_id = c.writer_id
         WHERE c.writer_id = #{memberId}
         AND c.del_flag IS NULL
         <if test="keyword != null and keyword != ''">
@@ -227,16 +227,16 @@
         UNION ALL
 
         SELECT
-        a.answer_id AS id,
-        a.question_id AS member_id,
-        a.writer_id,
-        a.created_at,
-        q.title,
-        m.nickname,
-        'ANSWER' AS category
+        a.answer_id   AS id,
+        a.question_id AS target_id,    <!-- 핵심: 원글 id -->
+        a.writer_id   AS member_id,    <!-- 답글 작성자 -->
+        mw.nickname   AS nickname,     <!-- 답글 작성자 닉네임 -->
+        q.title       AS title,
+        a.created_at  AS created_at,
+        'ANSWER'      AS category
         FROM answer a
         JOIN question q ON a.question_id = q.question_id
-        JOIN member m ON q.member_id = m.member_id
+        JOIN member mw  ON mw.member_id = a.writer_id
         WHERE a.writer_id = #{memberId}
         AND a.del_flag IS NULL
         <if test="keyword != null and keyword != ''">
