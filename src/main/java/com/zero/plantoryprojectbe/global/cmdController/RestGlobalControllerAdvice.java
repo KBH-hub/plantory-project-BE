@@ -23,6 +23,11 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class RestGlobalControllerAdvice {
 
+    @ExceptionHandler(org.springframework.security.authentication.BadCredentialsException.class)
+    public ResponseEntity<?> handleBadCredentials(Exception e) {
+        return ResponseEntity.status(401).body(Map.of("error", "아이디 또는 비밀번호가 올바르지 않습니다."));
+    }
+
     @ExceptionHandler(LockedException.class)
     public ResponseEntity<Map<String, String>> handleLocked(LockedException ex,
                                                             HttpServletRequest req) {
