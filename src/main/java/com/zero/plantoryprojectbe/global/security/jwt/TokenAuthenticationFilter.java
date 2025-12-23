@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.lang.NonNull;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -23,9 +24,9 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            FilterChain filterChain
+            @NonNull HttpServletRequest request,
+            @NonNull HttpServletResponse response,
+            @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
 
         String uri = request.getRequestURI();
@@ -44,7 +45,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
         String token = authorizationHeader.substring(TOKEN_PREFIX.length());
 
-        if (!tokenProvider.validateToken(token)) {
+        if (tokenProvider.validateToken(token)) {
             log.warn("유효하지 않은 JWT: {}", uri);
             filterChain.doFilter(request, response);
             return;

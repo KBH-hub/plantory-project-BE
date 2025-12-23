@@ -1,7 +1,7 @@
 package com.zero.plantoryprojectbe.sharing.service;
 
 import com.zero.plantoryprojectbe.notice.dto.NoticeDTO;
-import com.zero.plantoryprojectbe.global.dto.NoticeTargetType;
+import com.zero.plantoryprojectbe.global.plantoryEnum.NoticeTargetType;
 import com.zero.plantoryprojectbe.notice.NoticeMapper;
 import com.zero.plantoryprojectbe.sharing.SharingMapper;
 import com.zero.plantoryprojectbe.sharing.dto.SelectSharingDetailResponse;

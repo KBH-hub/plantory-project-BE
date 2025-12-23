@@ -1,8 +1,8 @@
 package com.zero.plantoryprojectbe.message.service;
 
-import com.zero.plantoryprojectbe.global.dto.BoxType;
-import com.zero.plantoryprojectbe.global.dto.MessageTargetType;
-import com.zero.plantoryprojectbe.global.dto.TargetType;
+import com.zero.plantoryprojectbe.global.plantoryEnum.BoxType;
+import com.zero.plantoryprojectbe.global.plantoryEnum.MessageTargetType;
+import com.zero.plantoryprojectbe.global.plantoryEnum.TargetType;
 import com.zero.plantoryprojectbe.message.dto.MessageListResponse;
 import com.zero.plantoryprojectbe.message.dto.MessageRequest;
 import com.zero.plantoryprojectbe.message.dto.MessageResponse;

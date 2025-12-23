@@ -3,7 +3,7 @@ package com.zero.plantoryprojectbe.plantingCalendar.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zero.plantoryprojectbe.global.config.SolapiConfig;
 import com.zero.plantoryprojectbe.plantingCalendar.SolapiAuth;
-import com.zero.plantoryprojectbe.plantingCalendar.dto.SMSRequestDTO;
+import com.zero.plantoryprojectbe.plantingCalendar.dto.SMSRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -23,7 +23,7 @@ public class SMSServiceImpl implements SMSService {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
-    public Map<String,Object> sendSMS(SMSRequestDTO request) throws Exception {
+    public Map<String,Object> sendSMS(SMSRequest request) throws Exception {
         String auth = SolapiAuth.createAuthHeader(solapi.apiKey(), solapi.apiSecret());
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

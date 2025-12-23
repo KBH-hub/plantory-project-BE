@@ -1,4 +1,4 @@
-package com.zero.plantoryprojectbe.global.dto;
+package com.zero.plantoryprojectbe.global.plantoryEnum;
 
 public enum DeleteTargetType {
     SHARING,

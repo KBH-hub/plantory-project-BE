@@ -1,7 +1,7 @@
 package com.zero.plantoryprojectbe.sharing.mapper;
 
-import com.zero.plantoryprojectbe.global.dto.ManageDemand;
-import com.zero.plantoryprojectbe.global.dto.ManageLevel;
+import com.zero.plantoryprojectbe.global.plantoryEnum.ManageDemand;
+import com.zero.plantoryprojectbe.global.plantoryEnum.ManageLevel;
 import com.zero.plantoryprojectbe.sharing.SharingMapper;
 import com.zero.plantoryprojectbe.sharing.dto.CommentRequest;
 import com.zero.plantoryprojectbe.sharing.dto.SharingRequest;

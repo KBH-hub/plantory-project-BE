@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -37,15 +38,10 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
 
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(
-                                "/api/auth/**",
-                                "/api/members/**",
-                                "/api/profile/**"
-                        ).permitAll()
-
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/**").authenticated()
-
-                        .anyRequest().permitAll()
+                        .anyRequest().denyAll()
                 )
 
                 .formLogin(fl -> fl.disable())
@@ -53,14 +49,20 @@ public class SecurityConfig {
                 .logout(lo -> lo.disable())
                 .httpBasic(hb -> hb.disable())
 
-                // 403 처리
+                // 401, 403 처리
                 .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint((req, res, e) -> {
+                            res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                            res.setContentType("application/json;charset=UTF-8");
+                            res.getWriter().write("{\"code\":\"SEC-401\",\"title\":\"인증 필요\",\"message\":\"로그인이 필요합니다.\",\"path\":\"" + req.getRequestURI() + "\",\"status\":\"401\"}");
+                        })
                         .accessDeniedHandler((req, res, e) -> {
                             res.setStatus(HttpServletResponse.SC_FORBIDDEN);
                             res.setContentType("application/json;charset=UTF-8");
-                            res.getWriter().write("{\"error\":\"권한이 없습니다.\"}");
+                            res.getWriter().write("{\"code\":\"SEC-403\",\"title\":\"접근 거부\",\"message\":\"이 리소스에 접근 권한이 없습니다.\",\"path\":\"" + req.getRequestURI() + "\",\"status\":\"403\"}");
                         })
                 );
+
 
         http.addFilterBefore(
                 new TokenAuthenticationFilter(tokenProvider),

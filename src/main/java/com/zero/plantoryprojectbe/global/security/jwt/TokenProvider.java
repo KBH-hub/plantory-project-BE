@@ -46,13 +46,13 @@ public class TokenProvider {
     public boolean validateToken(String token) {
         try {
             parseClaims(token);
-            return true;
+            return false;
         } catch (ExpiredJwtException e) {
             log.info("ExpiredJwtException: ", e);
-            return false;
+            return true;
         } catch (JwtException | IllegalArgumentException e) {
             log.info("JwtException: ", e);
-            return false;
+            return true;
         }
     }
     
@@ -75,7 +75,7 @@ public class TokenProvider {
                 memberDetailService.loadUserById(memberId);
 
         if (memberDetail.memberResponse().getStopDay() != null) {
-            throw new RuntimeException("정지된 사용자");
+            throw new RuntimeException("정지된 사용자입니다.");
         }
 
         return new UsernamePasswordAuthenticationToken(

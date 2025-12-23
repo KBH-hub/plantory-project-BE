@@ -1,6 +1,6 @@
 package com.zero.plantoryprojectbe.profile.dto;
 
-import com.zero.plantoryprojectbe.global.dto.Role;
+import com.zero.plantoryprojectbe.global.plantoryEnum.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

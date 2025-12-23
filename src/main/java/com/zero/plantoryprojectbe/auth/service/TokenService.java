@@ -13,7 +13,7 @@ public class TokenService {
 
     public String createNewAccessToken(String refreshToken) {
 
-        if (!tokenProvider.validateToken(refreshToken)) {
+        if (tokenProvider.validateToken(refreshToken)) {
             throw new IllegalArgumentException("Unexpected token");
         }
 

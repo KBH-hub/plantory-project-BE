@@ -1,9 +1,9 @@
 package com.zero.plantoryprojectbe.sharing.service;
 
 import com.zero.plantoryprojectbe.image.dto.ImageDTO;
-import com.zero.plantoryprojectbe.global.dto.ImageTargetType;
-import com.zero.plantoryprojectbe.global.dto.ManageDemand;
-import com.zero.plantoryprojectbe.global.dto.ManageLevel;
+import com.zero.plantoryprojectbe.global.plantoryEnum.ImageTargetType;
+import com.zero.plantoryprojectbe.global.plantoryEnum.ManageDemand;
+import com.zero.plantoryprojectbe.global.plantoryEnum.ManageLevel;
 import com.zero.plantoryprojectbe.image.ImageMapper;
 import com.zero.plantoryprojectbe.sharing.SharingMapper;
 import com.zero.plantoryprojectbe.sharing.dto.*;

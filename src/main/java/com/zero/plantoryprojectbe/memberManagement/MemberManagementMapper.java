@@ -1,6 +1,6 @@
 package com.zero.plantoryprojectbe.memberManagement;
 
-import com.zero.plantoryprojectbe.global.dto.DeleteTargetType;
+import com.zero.plantoryprojectbe.global.plantoryEnum.DeleteTargetType;
 import com.zero.plantoryprojectbe.memberManagement.dto.MemberManagementResponse;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

@@ -1,7 +1,7 @@
 package com.zero.plantoryprojectbe.plantingCalendar.service;
 
 import com.zero.plantoryprojectbe.image.dto.ImageDTO;
-import com.zero.plantoryprojectbe.global.dto.ImageTargetType;
+import com.zero.plantoryprojectbe.global.plantoryEnum.ImageTargetType;
 import com.zero.plantoryprojectbe.plantingCalendar.dto.*;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
@@ -31,7 +31,7 @@ class PlantingCalenderServiceTest {
     @Test
     @DisplayName("물주기 알림 전송 처리")
     void deleteDiaryTest() throws Exception {
-        SMSRequestDTO dto = SMSRequestDTO.builder()
+        SMSRequest dto = SMSRequest.builder()
                 .to("01000000000")
                 .from("01000000000")
                 .text("문자 전송 테스트")

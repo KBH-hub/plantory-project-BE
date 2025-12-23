@@ -1,7 +1,7 @@
 package com.zero.plantoryprojectbe.member.service;
 
 import com.zero.plantoryprojectbe.member.MemberMapper;
-import com.zero.plantoryprojectbe.global.dto.Role;
+import com.zero.plantoryprojectbe.global.plantoryEnum.Role;
 import com.zero.plantoryprojectbe.profile.dto.MemberRequest;
 import com.zero.plantoryprojectbe.profile.dto.MemberResponse;
 import com.zero.plantoryprojectbe.profile.dto.MemberSignUpRequest;

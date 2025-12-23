@@ -1,7 +1,7 @@
 package com.zero.plantoryprojectbe.myPlant.service;
 
 import com.zero.plantoryprojectbe.image.dto.ImageDTO;
-import com.zero.plantoryprojectbe.global.dto.ImageTargetType;
+import com.zero.plantoryprojectbe.global.plantoryEnum.ImageTargetType;
 import com.zero.plantoryprojectbe.global.utils.StorageUploader;
 import com.zero.plantoryprojectbe.image.ImageMapper;
 import com.zero.plantoryprojectbe.myPlant.MyPlantMapper;
