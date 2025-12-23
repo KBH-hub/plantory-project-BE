@@ -35,6 +35,10 @@ mybatis:
 
 server:
   port: 9000
+  error:
+    include-message: always
+    include-binding-errors: always
+
 
 openapi:
   nongsaro:
@@ -54,3 +58,8 @@ jwt:
   secret: study-springboot-jwt-secret-key-256bit!!
   access-token-expiration: 1800000
   refresh-token-expiration: 1209600000
+
+logging:
+  level:
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
