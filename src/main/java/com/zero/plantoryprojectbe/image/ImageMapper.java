@@ -1,7 +1,7 @@
 package com.zero.plantoryprojectbe.image;
 
 import com.zero.plantoryprojectbe.image.dto.ImageDTO;
-import com.zero.plantoryprojectbe.global.dto.ImageTargetType;
+import com.zero.plantoryprojectbe.global.plantoryEnum.ImageTargetType;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

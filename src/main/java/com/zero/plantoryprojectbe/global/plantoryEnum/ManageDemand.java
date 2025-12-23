@@ -1,4 +1,4 @@
-package com.zero.plantoryprojectbe.global.dto;
+package com.zero.plantoryprojectbe.global.plantoryEnum;
 
 public enum ManageDemand {
     STRONG("잘 견딤"),         // 낮음(잘 견딤), 잘 견딤(dry)

@@ -1,6 +1,6 @@
 package com.zero.plantoryprojectbe.profile.service;
 
-import com.zero.plantoryprojectbe.global.dto.ImageTargetType;
+import com.zero.plantoryprojectbe.global.plantoryEnum.ImageTargetType;
 import com.zero.plantoryprojectbe.image.ImageMapper;
 import com.zero.plantoryprojectbe.profile.ProfileSharingInsertMapper;
 import com.zero.plantoryprojectbe.profile.dto.ProfileInterestListRequest;

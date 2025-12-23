@@ -8,6 +8,7 @@ import org.springframework.security.authentication.LockedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -28,7 +29,12 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-        MemberDetail user = (MemberDetail) userDetailsService.loadUserByUsername(username);
+        MemberDetail user;
+        try {
+            user = (MemberDetail) userDetailsService.loadUserByUsername(username);
+        } catch (UsernameNotFoundException e) {
+            throw new BadCredentialsException("아이디 또는 비밀번호가 올바르지 않습니다.");
+        }
 
         if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new BadCredentialsException("아이디 또는 비밀번호가 올바르지 않습니다.");
