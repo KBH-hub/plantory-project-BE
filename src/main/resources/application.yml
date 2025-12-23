@@ -34,6 +34,10 @@ mybatis:
 
 
 server:
+  servlet:
+    session:
+      cookie:
+        same-site: Lax
   port: 9000
 
 openapi:

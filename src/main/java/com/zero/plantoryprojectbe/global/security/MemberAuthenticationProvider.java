@@ -29,6 +29,10 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
         String password = authentication.getCredentials().toString();
 
         MemberDetail user = (MemberDetail) userDetailsService.loadUserByUsername(username);
+        log.info("username={}", username);
+        log.info("rawPwLen={}", password == null ? null : password.length());
+        log.info("encodedPw={}", user.getPassword());
+        log.info("matches={}", passwordEncoder.matches(password, user.getPassword()));
 
         if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new BadCredentialsException("아이디 또는 비밀번호가 올바르지 않습니다.");
