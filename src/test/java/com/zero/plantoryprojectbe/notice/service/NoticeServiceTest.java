@@ -1,6 +1,6 @@
 package com.zero.plantoryprojectbe.notice.service;
 
-import com.zero.plantoryprojectbe.global.dto.NoticeDTO;
+import com.zero.plantoryprojectbe.notice.dto.NoticeDTO;
 import com.zero.plantoryprojectbe.global.dto.NoticeTargetType;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;

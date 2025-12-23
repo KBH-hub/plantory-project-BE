@@ -1,6 +1,6 @@
 package com.zero.plantoryprojectbe.notice;
 
-import com.zero.plantoryprojectbe.global.dto.NoticeDTO;
+import com.zero.plantoryprojectbe.notice.dto.NoticeDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

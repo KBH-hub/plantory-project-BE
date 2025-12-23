@@ -1,6 +1,6 @@
 package com.zero.plantoryprojectbe.notice;
 
-import com.zero.plantoryprojectbe.global.dto.NoticeDTO;
+import com.zero.plantoryprojectbe.notice.dto.NoticeDTO;
 import com.zero.plantoryprojectbe.global.security.MemberDetail;
 import com.zero.plantoryprojectbe.notice.service.NoticeService;
 import lombok.RequiredArgsConstructor;

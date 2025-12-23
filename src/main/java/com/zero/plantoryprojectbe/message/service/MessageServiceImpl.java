@@ -1,6 +1,6 @@
 package com.zero.plantoryprojectbe.message.service;
 
-import com.zero.plantoryprojectbe.global.dto.NoticeDTO;
+import com.zero.plantoryprojectbe.notice.dto.NoticeDTO;
 import com.zero.plantoryprojectbe.global.dto.NoticeTargetType;
 import com.zero.plantoryprojectbe.message.MessageMapper;
 import com.zero.plantoryprojectbe.message.dto.MessageListResponse;
