@@ -1,9 +1,9 @@
 package com.zero.plantoryprojectbe.plantingCalendar.service;
 
 import com.zero.plantoryprojectbe.global.config.SolapiConfig;
-import com.zero.plantoryprojectbe.image.dto.ImageDTO;
+import com.zero.plantoryprojectbe.global.dto.ImageDTO;
 import com.zero.plantoryprojectbe.global.dto.ImageTargetType;
-import com.zero.plantoryprojectbe.notice.dto.NoticeDTO;
+import com.zero.plantoryprojectbe.global.dto.NoticeDTO;
 import com.zero.plantoryprojectbe.global.dto.NoticeTargetType;
 import com.zero.plantoryprojectbe.global.utils.StorageUploader;
 import com.zero.plantoryprojectbe.image.ImageMapper;

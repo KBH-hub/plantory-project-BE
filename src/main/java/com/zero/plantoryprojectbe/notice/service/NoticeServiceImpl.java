@@ -1,6 +1,6 @@
 package com.zero.plantoryprojectbe.notice.service;
 
-import com.zero.plantoryprojectbe.notice.dto.NoticeDTO;
+import com.zero.plantoryprojectbe.global.dto.NoticeDTO;
 import com.zero.plantoryprojectbe.notice.NoticeMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
