@@ -1,10 +1,6 @@
 spring:
   application:
     name: plantory-project-BE
-  #  security:
-  #    user:
-  #      name: admin
-  #      password: 1234
   cloud:
     gcp:
       storage:
@@ -22,15 +18,15 @@ mybatis:
     map-underscore-to-camel-case: true
   mapper-locations: classpath:mappers/*.xml
 
-#  jpa:
-#    hibernate:
-#      ddl-auto: validate
-#    show-sql: true
-#    properties:
-#      hibernate:
-#        format_sql: true
-#    open-in-view: false
-#    generate-ddl: true
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+    generate-ddl: true
 
 
 server:
@@ -46,7 +42,7 @@ openapi:
 
 security:
   remember-me:
-    key: dev-test-key   # ???
+    key: dev-test-key
 
 
 #security:
