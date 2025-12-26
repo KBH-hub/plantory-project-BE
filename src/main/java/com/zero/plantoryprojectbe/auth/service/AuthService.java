@@ -1,7 +1,6 @@
 package com.zero.plantoryprojectbe.auth.service;
 
 import com.zero.plantoryprojectbe.auth.dto.MemberInfoResponse;
-import com.zero.plantoryprojectbe.global.security.MemberDetail;
 import com.zero.plantoryprojectbe.auth.dto.LoginRequest;
 import com.zero.plantoryprojectbe.global.security.MemberPrincipal;
 import com.zero.plantoryprojectbe.global.security.jwt.TokenProvider;

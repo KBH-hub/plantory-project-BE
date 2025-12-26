@@ -2,7 +2,6 @@ package com.zero.plantoryprojectbe.sharing;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zero.plantoryprojectbe.global.security.MemberDetail;
 import com.zero.plantoryprojectbe.global.security.MemberPrincipal;
 import com.zero.plantoryprojectbe.sharing.dto.CommentRequest;
 import com.zero.plantoryprojectbe.sharing.dto.SharingRequest;

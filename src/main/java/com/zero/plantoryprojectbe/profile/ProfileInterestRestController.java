@@ -1,6 +1,5 @@
 package com.zero.plantoryprojectbe.profile;
 
-import com.zero.plantoryprojectbe.global.security.MemberDetail;
 import com.zero.plantoryprojectbe.global.security.MemberPrincipal;
 import com.zero.plantoryprojectbe.profile.dto.ProfileInterestListRequest;
 import com.zero.plantoryprojectbe.profile.dto.ProfileSharingResponse;

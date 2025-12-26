@@ -1,6 +1,5 @@
 package com.zero.plantoryprojectbe.report;
 
-import com.zero.plantoryprojectbe.global.security.MemberDetail;
 import com.zero.plantoryprojectbe.global.security.MemberPrincipal;
 import com.zero.plantoryprojectbe.report.dto.NameListResponse;
 import com.zero.plantoryprojectbe.report.dto.ReportRequest;

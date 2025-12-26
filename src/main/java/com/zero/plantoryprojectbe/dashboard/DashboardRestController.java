@@ -2,7 +2,6 @@ package com.zero.plantoryprojectbe.dashboard;
 
 import com.zero.plantoryprojectbe.dashboard.dto.DashboardSummaryResponse;
 import com.zero.plantoryprojectbe.dashboard.service.DashboardService;
-import com.zero.plantoryprojectbe.global.security.MemberDetail;
 import com.zero.plantoryprojectbe.global.security.MemberPrincipal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

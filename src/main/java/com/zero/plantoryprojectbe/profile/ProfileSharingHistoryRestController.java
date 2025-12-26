@@ -1,6 +1,5 @@
 package com.zero.plantoryprojectbe.profile;
 
-import com.zero.plantoryprojectbe.global.security.MemberDetail;
 import com.zero.plantoryprojectbe.global.security.MemberPrincipal;
 import com.zero.plantoryprojectbe.profile.dto.ProfileSharingHistoryListRequest;
 import com.zero.plantoryprojectbe.profile.dto.ProfileSharingHistoryListResponse;
@@ -101,7 +100,7 @@ public class ProfileSharingHistoryRestController {
     })
     @GetMapping("/counts")
     public Map<String, Integer> getProfileCounts(
-            @AuthenticationPrincipal MemberDetail user
+            @AuthenticationPrincipal MemberPrincipal user
     ) {
         Long memberId = user.getMemberId();
 
