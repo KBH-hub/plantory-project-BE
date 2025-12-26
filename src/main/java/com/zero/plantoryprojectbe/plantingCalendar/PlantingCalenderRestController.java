@@ -2,7 +2,6 @@ package com.zero.plantoryprojectbe.plantingCalendar;
 
 import com.zero.plantoryprojectbe.global.security.MemberPrincipal;
 import com.zero.plantoryprojectbe.image.dto.ImageDTO;
-import com.zero.plantoryprojectbe.global.security.MemberDetail;
 import com.zero.plantoryprojectbe.plantingCalendar.dto.DiaryRequest;
 import com.zero.plantoryprojectbe.plantingCalendar.dto.DiaryResponse;
 import com.zero.plantoryprojectbe.plantingCalendar.dto.MyPlantDiaryResponse;

@@ -2,7 +2,6 @@ package com.zero.plantoryprojectbe.question;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zero.plantoryprojectbe.global.security.MemberDetail;
 import com.zero.plantoryprojectbe.global.security.MemberPrincipal;
 import com.zero.plantoryprojectbe.question.dto.AnswerRequest;
 import com.zero.plantoryprojectbe.question.dto.QuestionRequest;

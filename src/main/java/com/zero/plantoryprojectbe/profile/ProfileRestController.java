@@ -1,6 +1,5 @@
 package com.zero.plantoryprojectbe.profile;
 
-import com.zero.plantoryprojectbe.global.security.MemberDetail;
 import com.zero.plantoryprojectbe.global.security.MemberPrincipal;
 import com.zero.plantoryprojectbe.image.service.ImageService;
 import com.zero.plantoryprojectbe.profile.dto.PasswordChangeRequest;

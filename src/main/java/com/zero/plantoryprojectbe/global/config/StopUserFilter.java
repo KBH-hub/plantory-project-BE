@@ -1,6 +1,6 @@
 package com.zero.plantoryprojectbe.global.config;
 
-import com.zero.plantoryprojectbe.global.security.MemberDetail;
+import com.zero.plantoryprojectbe.global.security.MemberPrincipal;
 import com.zero.plantoryprojectbe.member.Member;
 import com.zero.plantoryprojectbe.member.MemberRepository;
 import com.zero.plantoryprojectbe.profile.ProfileMapper;
@@ -9,6 +9,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.jspecify.annotations.NonNull;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -29,15 +30,15 @@ public class StopUserFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            FilterChain filterChain
+            @NonNull HttpServletRequest request,
+            @NonNull HttpServletResponse response,
+            @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         if (auth != null && auth.isAuthenticated()
-                && auth.getPrincipal() instanceof MemberDetail userDetail) {
+                && auth.getPrincipal() instanceof MemberPrincipal userDetail) {
 
             Long memberId = userDetail.getMemberId();
             Optional<Member> member = memberRepository.findByMemberIdAndDelFlagIsNull(memberId);

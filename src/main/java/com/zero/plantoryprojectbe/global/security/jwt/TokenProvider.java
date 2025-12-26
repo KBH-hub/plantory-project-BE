@@ -1,6 +1,5 @@
 package com.zero.plantoryprojectbe.global.security.jwt;
 
-import com.zero.plantoryprojectbe.global.security.MemberDetail;
 import com.zero.plantoryprojectbe.global.security.MemberDetailService;
 import com.zero.plantoryprojectbe.global.security.MemberPrincipal;
 import com.zero.plantoryprojectbe.member.Member;

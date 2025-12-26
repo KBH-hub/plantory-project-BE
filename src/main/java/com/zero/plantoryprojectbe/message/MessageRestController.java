@@ -2,7 +2,6 @@ package com.zero.plantoryprojectbe.message;
 
 import com.zero.plantoryprojectbe.global.plantoryEnum.BoxType;
 import com.zero.plantoryprojectbe.global.plantoryEnum.TargetType;
-import com.zero.plantoryprojectbe.global.security.MemberDetail;
 import com.zero.plantoryprojectbe.global.security.MemberPrincipal;
 import com.zero.plantoryprojectbe.message.dto.MessageListResponse;
 import com.zero.plantoryprojectbe.message.dto.MessageRequest;

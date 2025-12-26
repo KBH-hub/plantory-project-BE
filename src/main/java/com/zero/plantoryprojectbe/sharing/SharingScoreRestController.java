@@ -1,6 +1,5 @@
 package com.zero.plantoryprojectbe.sharing;
 
-import com.zero.plantoryprojectbe.global.security.MemberDetail;
 import com.zero.plantoryprojectbe.global.security.MemberPrincipal;
 import com.zero.plantoryprojectbe.sharing.dto.ReviewRequest;
 import com.zero.plantoryprojectbe.sharing.service.SharingScoreService;
