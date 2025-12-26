@@ -80,6 +80,15 @@ public class PlantingCalenderRestController {
             @ApiResponse(responseCode = "401", description = "인증 필요"),
             @ApiResponse(responseCode = "403", description = "권한 없음")
     })
+    @PostMapping("/watering")
+    public ResponseEntity<Map<String, String>> createWatering(){
+        int result = plantingCalenderService.registerWatering(1000);
+        if (result == 0) {
+            return ResponseEntity.status(400).body(Map.of("message", "create watering fail"));
+        }
+        return ResponseEntity.status(200).body(Map.of("message", "create watering success"));
+    }
+
     @PutMapping("/watering")
     public ResponseEntity<Map<String, String>> updateWateringFlag(
             @Parameter(description = "물주기 ID", example = "10")
