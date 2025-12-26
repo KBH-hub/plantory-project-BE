@@ -1,8 +1,9 @@
 package com.zero.plantoryprojectbe.global.config;
 
 import com.zero.plantoryprojectbe.global.security.MemberDetail;
+import com.zero.plantoryprojectbe.member.Member;
+import com.zero.plantoryprojectbe.member.MemberRepository;
 import com.zero.plantoryprojectbe.profile.ProfileMapper;
-import com.zero.plantoryprojectbe.profile.dto.MemberResponse;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,12 +18,14 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
 public class StopUserFilter extends OncePerRequestFilter {
 
     private final ProfileMapper profileMapper;
+    private final MemberRepository memberRepository;
 
     @Override
     protected void doFilterInternal(
@@ -36,10 +39,10 @@ public class StopUserFilter extends OncePerRequestFilter {
         if (auth != null && auth.isAuthenticated()
                 && auth.getPrincipal() instanceof MemberDetail userDetail) {
 
-            Long memberId = userDetail.memberResponse().getMemberId();
-            MemberResponse member = profileMapper.selectByMemberId(memberId);
+            Long memberId = userDetail.getMemberId();
+            Optional<Member> member = memberRepository.findByMemberIdAndDelFlagIsNull(memberId);
 
-            if (member == null) {
+            if (member.isEmpty()) {
                 request.getSession().invalidate();
                 SecurityContextHolder.clearContext();
                 String error = URLEncoder.encode("계정 정보를 찾을 수 없습니다.", StandardCharsets.UTF_8);
@@ -49,7 +52,7 @@ public class StopUserFilter extends OncePerRequestFilter {
 
 
 
-            LocalDateTime stopDay = member.getStopDay();
+            LocalDateTime stopDay = member.get().getStopDay();
             LocalDateTime today = LocalDateTime.now();
 
             if (stopDay != null && stopDay.isAfter(today)) {

@@ -1,13 +1,9 @@
 package com.zero.plantoryprojectbe.auth;
 
-import com.zero.plantoryprojectbe.auth.dto.AuthMeResponse;
-import com.zero.plantoryprojectbe.auth.dto.AuthUserResponse;
-import com.zero.plantoryprojectbe.auth.dto.LoginRequest;
+import com.zero.plantoryprojectbe.auth.dto.*;
 import com.zero.plantoryprojectbe.auth.service.AuthService;
-import com.zero.plantoryprojectbe.auth.dto.RefreshTokenRequest;
 import com.zero.plantoryprojectbe.global.security.jwt.TokenProvider;
 import com.zero.plantoryprojectbe.auth.service.RefreshTokenService;
-import com.zero.plantoryprojectbe.profile.dto.MemberResponse;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -106,7 +102,7 @@ public class SecurityAuthRestController {
         RefreshTokenRequest rt = refreshTokenService.findByRefreshToken(refreshToken);
         Long memberId = rt.getMemberId();
 
-        MemberResponse member = authService.findMemberById(memberId);
+        MemberInfoResponse member = authService.findMemberInfo(memberId);
 
         String newAccessToken = tokenProvider.createAccessToken(String.valueOf(memberId));
 
@@ -148,7 +144,7 @@ public class SecurityAuthRestController {
         }
 
         Long memberId = rt.getMemberId();
-        MemberResponse member = authService.findMemberById(memberId);
+        MemberInfoResponse member = authService.findMemberInfo(memberId);
 
         if (member == null) {
             return ResponseEntity.status(401).build();

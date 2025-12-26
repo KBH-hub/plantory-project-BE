@@ -1,5 +1,6 @@
 package com.zero.plantoryprojectbe.notice;
 
+import com.zero.plantoryprojectbe.global.security.MemberPrincipal;
 import com.zero.plantoryprojectbe.notice.dto.NoticeDTO;
 import com.zero.plantoryprojectbe.global.security.MemberDetail;
 import com.zero.plantoryprojectbe.notice.service.NoticeService;
@@ -33,9 +34,9 @@ public class NoticeRestController {
     })
     @GetMapping
     public List<NoticeDTO> getNoticeByReceiver(
-            @AuthenticationPrincipal MemberDetail memberDetail
+            @AuthenticationPrincipal MemberPrincipal principal
     ) {
-        Long receiverId = memberDetail.memberResponse().getMemberId();
+        Long receiverId = principal.getMemberId();
         return noticeService.getNoticeByReceiver(receiverId);
     }
 
@@ -79,9 +80,9 @@ public class NoticeRestController {
     })
     @DeleteMapping
     public int removeAllNotice(
-            @AuthenticationPrincipal MemberDetail memberDetail
+            @AuthenticationPrincipal MemberPrincipal principal
     ) {
-        Long receiverId = memberDetail.memberResponse().getMemberId();
+        Long receiverId = principal.getMemberId();
         return noticeService.removeAllNotice(receiverId);
     }
 }

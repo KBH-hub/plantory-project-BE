@@ -1,10 +1,12 @@
 package com.zero.plantoryprojectbe.auth.service;
 
-import com.zero.plantoryprojectbe.member.MemberMapper;
+import com.zero.plantoryprojectbe.auth.dto.MemberInfoResponse;
 import com.zero.plantoryprojectbe.global.security.MemberDetail;
 import com.zero.plantoryprojectbe.auth.dto.LoginRequest;
+import com.zero.plantoryprojectbe.global.security.MemberPrincipal;
 import com.zero.plantoryprojectbe.global.security.jwt.TokenProvider;
-import com.zero.plantoryprojectbe.profile.dto.MemberResponse;
+import com.zero.plantoryprojectbe.member.Member;
+import com.zero.plantoryprojectbe.member.MemberRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +24,7 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final TokenProvider tokenProvider;
     private final RefreshTokenService refreshTokenService;
-    private final MemberMapper memberMapper;
+    private final MemberRepository memberRepository;
 
     public Map<String, String> login(
             LoginRequest request,
@@ -36,10 +38,8 @@ public class AuthService {
                         )
                 );
 
-        MemberDetail memberDetail =
-                (MemberDetail) authentication.getPrincipal();
-
-        Long memberId = memberDetail.memberResponse().getMemberId();
+        MemberPrincipal principal = (MemberPrincipal) authentication.getPrincipal();
+        Long memberId = principal.getMemberId();
 
         String accessToken =
                 tokenProvider.createAccessToken(memberId.toString());
@@ -55,21 +55,19 @@ public class AuthService {
         cookie.setMaxAge(60 * 60 * 5);
 //        cookie.setMaxAge(60 * 60 * 24 * 14);
         cookie.setSecure(false);
-        cookie.setAttribute("SameSite", "Lax");  // 배표시 Lax --> None
+        cookie.setAttribute("SameSite", "Lax"); // HTTPS일때는 None으로 변경
         response.addCookie(cookie);
 
         return Map.of("accessToken", accessToken);
     }
 
-    public MemberResponse findMemberById(Long memberId) {
-        MemberResponse member = memberMapper.selectByMemberId(memberId);
+    public MemberInfoResponse findMemberInfo(Long memberId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원"));
 
-        if (member == null) {
-            throw new IllegalArgumentException("존재하지 않는 회원");
-        }
-
-        return member;
+        return MemberInfoResponse.from(member);
     }
+
 }
 
 

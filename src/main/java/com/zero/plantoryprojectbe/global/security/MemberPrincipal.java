@@ -1,6 +1,5 @@
 package com.zero.plantoryprojectbe.global.security;
 
-import com.zero.plantoryprojectbe.member.Member;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,15 +8,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-public class MemberDetail implements UserDetails {
+public class MemberPrincipal implements UserDetails {
 
     @Getter
     private final Long memberId;
     private final String membername;
+    @Getter
     private final String role;
     private final String password;
 
-    private MemberDetail(
+    public MemberPrincipal(
             Long memberId,
             String membername,
             String role,
@@ -27,15 +27,6 @@ public class MemberDetail implements UserDetails {
         this.membername = membername;
         this.role = role;
         this.password = password;
-    }
-
-    public static MemberDetail from(Member member) {
-        return new MemberDetail(
-                member.getMemberId(),
-                member.getMembername(),
-                member.getRole().name(),
-                member.getPassword()
-        );
     }
 
     @Override
@@ -53,8 +44,23 @@ public class MemberDetail implements UserDetails {
         return membername;
     }
 
-    @Override public boolean isAccountNonExpired() { return true; }
-    @Override public boolean isAccountNonLocked() { return true; }
-    @Override public boolean isCredentialsNonExpired() { return true; }
-    @Override public boolean isEnabled() { return true; }
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

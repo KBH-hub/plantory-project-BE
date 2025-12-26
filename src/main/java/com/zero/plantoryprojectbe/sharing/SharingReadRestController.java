@@ -1,6 +1,7 @@
 package com.zero.plantoryprojectbe.sharing;
 
 import com.zero.plantoryprojectbe.global.security.MemberDetail;
+import com.zero.plantoryprojectbe.global.security.MemberPrincipal;
 import com.zero.plantoryprojectbe.sharing.dto.*;
 import com.zero.plantoryprojectbe.sharing.service.SharingReadService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -40,9 +41,9 @@ public class SharingReadRestController {
     @GetMapping("/countInterest")
     public int countInterest(
             @Parameter(hidden = true)
-            @AuthenticationPrincipal MemberDetail memberDetail
+            @AuthenticationPrincipal MemberPrincipal principal
     ) {
-        return sharingReadService.countInterest(memberDetail.memberResponse().getMemberId());
+        return sharingReadService.countInterest(principal.getMemberId());
     }
 
     @Operation(
@@ -66,9 +67,9 @@ public class SharingReadRestController {
             @Parameter(description = "나눔 ID", example = "100")
             @PathVariable Long sharingId,
             @Parameter(hidden = true)
-            @AuthenticationPrincipal MemberDetail memberDetail
+            @AuthenticationPrincipal MemberPrincipal principal
     ) {
-        Long memberId = (memberDetail != null) ? memberDetail.memberResponse().getMemberId() : null;
+        Long memberId = (principal != null) ? principal.getMemberId() : null;
         return sharingReadService.getSharingDetail(sharingId, memberId);
     }
 
@@ -93,9 +94,9 @@ public class SharingReadRestController {
             @Parameter(description = "나눔 ID", example = "100")
             @PathVariable Long sharingId,
             @Parameter(hidden = true)
-            @AuthenticationPrincipal MemberDetail memberDetail
+            @AuthenticationPrincipal MemberPrincipal principal
     ) {
-        Long receiverId = memberDetail.memberResponse().getMemberId();
+        Long receiverId = principal.getMemberId();
         return sharingReadService.getMessagePartners(receiverId, sharingId);
     }
 
@@ -132,9 +133,9 @@ public class SharingReadRestController {
             @Parameter(description = "나눔 ID", example = "100")
             @PathVariable Long sharingId,
             @Parameter(hidden = true)
-            @AuthenticationPrincipal MemberDetail memberDetail
+            @AuthenticationPrincipal MemberPrincipal principal
     ) {
-        Long memberId = memberDetail.memberResponse().getMemberId();
+        Long memberId = principal.getMemberId();
         ReviewInfoResponse result = sharingReadService.getReviewInfo(sharingId, memberId);
         return ResponseEntity.ok(result);
     }

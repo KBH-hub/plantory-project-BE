@@ -1,11 +1,12 @@
 package com.zero.plantoryprojectbe.auth.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.zero.plantoryprojectbe.global.plantoryEnum.Role;
+import com.zero.plantoryprojectbe.member.Role;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -29,13 +30,13 @@ public class AuthUserResponse {
     private String address;
 
     @Schema(description = "나눔 평점", example = "5.5")
-    private Integer sharingRate;
+    private BigDecimal sharingRate;
 
     @Schema(description = "기술 숙련도 점수", example = "9.0")
-    private Integer skillRate;
+    private BigDecimal skillRate;
 
     @Schema(description = "관리 숙련도 점수", example = "7.0")
-    private Integer managementRate;
+    private BigDecimal managementRate;
 
     @Schema(description = "회원 권한", example = "ROLE_USER")
     private Role role;
