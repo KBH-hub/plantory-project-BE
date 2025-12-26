@@ -12,13 +12,14 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.apache.logging.log4j.Marker;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+
+import static com.zero.plantoryprojectbe.global.plantoryEnum.ImageTargetType.PROFILE;
 
 
 @Log4j2
@@ -73,7 +74,7 @@ public class AuthService {
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원"));
 
         String profileImageUrl = memberImageRepository
-                .findTop1ByMember_MemberIdAndDelFlagIsNullOrderByCreatedAtDesc(memberId)
+                .findTop1ByMember_MemberIdAndTargetTypeAndDelFlagIsNullOrderByCreatedAtDesc(memberId, "PROFILE")
                 .map(MemberImage::getFileUrl)
                 .orElse(null);
 
