@@ -128,7 +128,7 @@ public class SecurityAuthRestController {
     })
     @GetMapping("/me")
     public ResponseEntity<AuthMeResponse> me(
-            @Parameter(description = "리프레시 토큰 쿠키 값", required = false)
+            @Parameter(description = "리프레시 토큰 쿠키 값")
             @CookieValue(name = "refreshToken", required = false) String refreshToken
     ) {
         if (refreshToken == null) {
@@ -151,7 +151,6 @@ public class SecurityAuthRestController {
         }
 
         String accessToken = tokenProvider.createAccessToken(String.valueOf(memberId));
-
         return ResponseEntity.ok(
                 AuthMeResponse.builder()
                         .user(
@@ -165,6 +164,7 @@ public class SecurityAuthRestController {
                                         .skillRate(member.getSkillRate())
                                         .managementRate(member.getManagementRate())
                                         .role(member.getRole())
+                                        .profileImageUrl(member.getProfileImageUrl())
                                         .stopDay(member.getStopDay())
                                         .build()
                         )

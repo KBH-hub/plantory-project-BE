@@ -41,6 +41,9 @@ public class AuthUserResponse {
     @Schema(description = "회원 권한", example = "ROLE_USER")
     private Role role;
 
+    @Schema(description = "회원 프로필 이미지", example = "https://storage.googleapis.com/plantory/images/2025/12/12/d3260843-6ca3-4f17-ac9a-4226b5e59e06-jejuOrangeCat_300_300.jpg")
+    private String profileImageUrl;
+
     @Schema(
             description = "정지 해제 예정일 (없으면 null)",
             example = "2025-12-31 23:59:59"

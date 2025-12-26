@@ -37,8 +37,13 @@ public class MemberInfoResponse {
     @Schema(description = "관리 숙련도 점수", example = "7.0")
     private final BigDecimal managementRate;
 
+    @Schema(description = "회원 프로필 이미지", example = "https://storage.googleapis.com/plantory/images/2025/12/12/d3260843-6ca3-4f17-ac9a-4226b5e59e06-jejuOrangeCat_300_300.jpg")
+    private String profileImageUrl;
+
     @Schema(description = "회원 권한", example = "USER")
     private final Role role;
+
+
 
     @Schema(
             description = "정지 해제 예정일 (없으면 null)",
@@ -56,6 +61,7 @@ public class MemberInfoResponse {
             BigDecimal sharingRate,
             BigDecimal skillRate,
             BigDecimal managementRate,
+            String  profileImageUrl,
             Role role,
             LocalDateTime stopDay
     ) {
@@ -67,11 +73,12 @@ public class MemberInfoResponse {
         this.sharingRate = sharingRate;
         this.skillRate = skillRate;
         this.managementRate = managementRate;
+        this.profileImageUrl = profileImageUrl;
         this.role = role;
         this.stopDay = stopDay;
     }
 
-    public static MemberInfoResponse from(Member member) {
+    public static MemberInfoResponse from(Member member, String profileImageUrl) {
         return new MemberInfoResponse(
                 member.getMemberId(),
                 member.getMembername(),
@@ -81,8 +88,10 @@ public class MemberInfoResponse {
                 member.getSharingRate(),
                 member.getSkillRate(),
                 member.getManagementRate(),
+                profileImageUrl,
                 member.getRole(),
                 member.getStopDay()
         );
     }
+
 }

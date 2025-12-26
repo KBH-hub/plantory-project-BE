@@ -5,10 +5,14 @@ import com.zero.plantoryprojectbe.auth.dto.LoginRequest;
 import com.zero.plantoryprojectbe.global.security.MemberPrincipal;
 import com.zero.plantoryprojectbe.global.security.jwt.TokenProvider;
 import com.zero.plantoryprojectbe.member.Member;
+import com.zero.plantoryprojectbe.member.MemberImage;
+import com.zero.plantoryprojectbe.member.MemberImageRepository;
 import com.zero.plantoryprojectbe.member.MemberRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.Marker;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,6 +20,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
+
+@Log4j2
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -24,6 +30,7 @@ public class AuthService {
     private final TokenProvider tokenProvider;
     private final RefreshTokenService refreshTokenService;
     private final MemberRepository memberRepository;
+    private final MemberImageRepository memberImageRepository;
 
     public Map<String, String> login(
             LoginRequest request,
@@ -61,10 +68,16 @@ public class AuthService {
     }
 
     public MemberInfoResponse findMemberInfo(Long memberId) {
-        Member member = memberRepository.findById(memberId)
+        Member member = memberRepository
+                .findByMemberIdAndDelFlagIsNull(memberId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원"));
 
-        return MemberInfoResponse.from(member);
+        String profileImageUrl = memberImageRepository
+                .findTop1ByMember_MemberIdAndDelFlagIsNullOrderByCreatedAtDesc(memberId)
+                .map(MemberImage::getFileUrl)
+                .orElse(null);
+
+        return MemberInfoResponse.from(member, profileImageUrl);
     }
 
 }
