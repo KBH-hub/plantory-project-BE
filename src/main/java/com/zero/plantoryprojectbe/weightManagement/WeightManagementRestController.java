@@ -49,7 +49,7 @@ public class WeightManagementRestController {
             @AuthenticationPrincipal MemberDetail principal,
             @RequestBody SaveWeightRequest saveWeightRequest
     ) {
-        Long memberId = principal.memberResponse().getMemberId();
+        Long memberId = principal.getMemberId();
         weightManagementService.saveWeights(memberId, saveWeightRequest);
     }
 
@@ -90,7 +90,7 @@ public class WeightManagementRestController {
             @AuthenticationPrincipal MemberDetail principal,
             @RequestBody SaveRateRequest saveRateRequest
     ) {
-        Long memberId = principal.memberResponse().getMemberId();
+        Long memberId = principal.getMemberId();
         weightManagementService.saveRate(memberId, saveRateRequest);
     }
 }
