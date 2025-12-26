@@ -84,7 +84,7 @@ public class PlantingCalenderRestController {
     public ResponseEntity<Map<String, String>> createWatering(){
         int result = plantingCalenderService.registerWatering(1000);
         if (result == 0) {
-            return ResponseEntity.status(400).body(Map.of("message", "create watering fail"));
+            return ResponseEntity.status(200).body(Map.of("message", "not create watering"));
         }
         return ResponseEntity.status(200).body(Map.of("message", "create watering success"));
     }
