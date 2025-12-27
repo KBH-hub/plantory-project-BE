@@ -1,5 +1,6 @@
 package com.zero.plantoryprojectbe.member;
 
+import com.zero.plantoryprojectbe.global.plantoryEnum.ImageTargetType;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ class MemberImageRepositoryTest {
             Long memberId = 1L;
 
             var result = memberImageRepository
-                    .findTop1ByMember_MemberIdAndTargetTypeAndDelFlagIsNullOrderByCreatedAtDesc(memberId, PROFILE);
+                    .findTop1ByMember_MemberIdAndTargetTypeAndDelFlagIsNullOrderByCreatedAtDesc(memberId, String.valueOf(ImageTargetType.PROFILE));
 
             System.out.println("result present? " + result.isPresent());
             result.ifPresent(img -> {
