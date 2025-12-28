@@ -94,8 +94,8 @@ public class MyplantRestController {
         Long memberId = principal.getMemberId();
         request.setMemberId(memberId);
         if (myPlantService.updateMyPlant(request, delFile, file, memberId) == 0)
-            return ResponseEntity.status(400).body(Map.of("message", "myPlant regist fail"));
-        return ResponseEntity.ok().body(Map.of("message", "myPlant regist success"));
+            return ResponseEntity.status(400).body(Map.of("message", "myPlant update fail"));
+        return ResponseEntity.ok().body(Map.of("message", "myPlant update success"));
     }
 
     @Operation(summary = "내 식물 삭제", description = "내 식물을 삭제합니다. delFile은 삭제할 이미지 ID입니다.")
@@ -114,7 +114,7 @@ public class MyplantRestController {
             @RequestParam(required = false) Long delFile
     ) throws IOException {
         if (myPlantService.removePlant(myplantId, delFile) == 0)
-            return ResponseEntity.status(400).body(Map.of("message", "myPlant regist fail"));
-        return ResponseEntity.ok().body(Map.of("message", "myPlant regist success"));
+            return ResponseEntity.status(400).body(Map.of("message", "myPlant remove fail"));
+        return ResponseEntity.ok().body(Map.of("message", "myPlant remove success"));
     }
 }
