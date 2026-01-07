@@ -71,7 +71,7 @@ public class MessageRestController {
             @ApiResponse(responseCode = "401", description = "인증 필요"),
             @ApiResponse(responseCode = "403", description = "권한 없음")
     })
-    @DeleteMapping("/deleteMessages")
+    @DeleteMapping
     public ResponseEntity<Map<String, String>> deleteMessages(
             @RequestBody List<Long> messageIds
     ) {
@@ -90,7 +90,7 @@ public class MessageRestController {
             @ApiResponse(responseCode = "401", description = "인증 필요"),
             @ApiResponse(responseCode = "403", description = "권한 없음")
     })
-    @DeleteMapping("/deleteSenderMessages")
+    @DeleteMapping("/sender")
     public ResponseEntity<Map<String, String>> deleteSenderMessages(
             @RequestBody List<Long> messageIds
     ) {
@@ -133,7 +133,7 @@ public class MessageRestController {
             @ApiResponse(responseCode = "401", description = "인증 필요"),
             @ApiResponse(responseCode = "403", description = "권한 없음")
     })
-    @PostMapping("/messageRegist")
+    @PostMapping
     public ResponseEntity<Map<String, String>> registerMessage(
             @RequestBody MessageRequest messageRequest,
             @AuthenticationPrincipal MemberPrincipal principal
