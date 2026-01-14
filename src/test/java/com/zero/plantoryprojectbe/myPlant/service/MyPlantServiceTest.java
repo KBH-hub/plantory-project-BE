@@ -132,7 +132,6 @@ class MyPlantServiceTest {
         int result = myPlantService.updateMyPlant(request, delFileTargetId, file, memberId);
         log.info("수정 처리 건수: {}", result);
 
-        // update + 이미지 삭제 + 이미지 insert = 3
         assertEquals(3, result);
     }
 
@@ -140,7 +139,7 @@ class MyPlantServiceTest {
     @DisplayName("내 식물 삭제 처리")
     void removePlantTest() throws IOException {
         Long myPlantId = 1L;
-        Long delFile = 1L; // 실제 존재하는 이미지 ID
+        Long delFile = 1L;
 
         int result = myPlantService.removePlant(myPlantId, delFile);
         log.info("삭제 처리 건수: {}", result);

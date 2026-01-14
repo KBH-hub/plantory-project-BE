@@ -147,7 +147,7 @@ class PlantingCalendarMapperTest {
         Long existingMyPlantId = 1L;
 
         DiaryRequest diaryRequest = DiaryRequest.builder()
-                .myplantId(existingMyPlantId) // null 아님
+                .myplantId(existingMyPlantId)
                 .activity("열매 등록하기")
                 .state("좋음")
                 .memo("메모 내용")

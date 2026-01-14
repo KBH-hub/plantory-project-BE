@@ -36,7 +36,6 @@ class ProfileServiceImplTest {
     @Test
     @DisplayName("내 정보 조회 테스트")
     void getProfileInfoTest() {
-        // given
         Long memberId = 1L;
 
         Member member = Member.create("testuser", "encodedPw");
@@ -53,13 +52,11 @@ class ProfileServiceImplTest {
         when(memberRepository.findByMemberIdAndDelFlagIsNull(memberId))
                 .thenReturn(Optional.of(member));
 
-        //when
         ProfileInfoResponse result = profileService.getProfileInfo(memberId);
 
-        //then
         assertNotNull(result);
         assertEquals("테스트닉", result.getNickname());
-        assertEquals(BigDecimal.ZERO, result.getSharingRate()); // from()에서 null -> 0 처리했으면
+        assertEquals(BigDecimal.ZERO, result.getSharingRate());
         verify(memberRepository, times(1)).findByMemberIdAndDelFlagIsNull(memberId);
     }
 

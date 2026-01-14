@@ -51,7 +51,6 @@ public class SecurityConfig {
                 .logout(lo -> lo.disable())
                 .httpBasic(hb -> hb.disable())
 
-                // 401, 403 처리
                 .exceptionHandling(ex -> ex
                         .authenticationEntryPoint((req, res, e) -> {
                             res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

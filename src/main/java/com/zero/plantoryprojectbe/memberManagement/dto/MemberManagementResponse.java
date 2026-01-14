@@ -22,9 +22,6 @@ public class MemberManagementResponse {
     @Schema(description = "회원 아이디", example = "user_bob")
     private String membername;
 
-//    @Schema(description = "비밀번호(암호화)", example = "********")
-//    private String password;
-
     @Schema(description = "닉네임", example = "밥")
     private String nickname;
 

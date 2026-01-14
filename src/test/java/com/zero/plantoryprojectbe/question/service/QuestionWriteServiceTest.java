@@ -15,7 +15,7 @@ import java.util.List;
 @SpringBootTest
 @Slf4j
 @Transactional
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)   // ⭐ 순서 강제 - 줄여서 순강
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class QuestionWriteServiceTest {
 
     @Autowired

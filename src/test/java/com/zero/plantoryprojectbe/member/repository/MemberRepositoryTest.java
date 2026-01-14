@@ -20,7 +20,6 @@ class MemberRepositoryTest {
     @Test
     @DisplayName("회원가입 처리 (JPA save)")
     void saveMemberTest() {
-        // given
         Member member = Member.createForSignUp(
                 "testUser",
                 "pw1234!",
@@ -29,10 +28,8 @@ class MemberRepositoryTest {
                 "서울특별시 영등포구"
         );
 
-        // when
         Member saved = memberRepository.save(member);
 
-        // then
         assertNotNull(saved.getMemberId());
         assertTrue(memberRepository.findByMemberIdAndDelFlagIsNull(saved.getMemberId()).isPresent());
     }
@@ -40,7 +37,6 @@ class MemberRepositoryTest {
     @Test
     @DisplayName("아이디 중복 확인 (existsByMembernameAndDelFlagIsNull)")
     void existsByMembernameTest() {
-        // given
         Member member = Member.createForSignUp(
                 "honggd01",
                 "pw1234!",
@@ -50,17 +46,14 @@ class MemberRepositoryTest {
         );
         memberRepository.save(member);
 
-        // when
         boolean exists = memberRepository.existsByMembernameAndDelFlagIsNull("honggd01");
 
-        // then
         assertTrue(exists);
     }
 
     @Test
     @DisplayName("닉네임 중복 확인 (existsByNicknameAndDelFlagIsNull)")
     void existsByNicknameTest() {
-        // given
         Member member = Member.createForSignUp(
                 "someUser",
                 "pw1234!",
@@ -70,10 +63,8 @@ class MemberRepositoryTest {
         );
         memberRepository.save(member);
 
-        // when
         boolean exists = memberRepository.existsByNicknameAndDelFlagIsNull("길동가든");
 
-        // then
         assertTrue(exists);
     }
 }

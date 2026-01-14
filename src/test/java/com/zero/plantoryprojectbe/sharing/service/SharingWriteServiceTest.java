@@ -23,7 +23,6 @@ public class SharingWriteServiceTest {
     @Autowired
     private SharingWriteService sharingWriteService;
 
-    /** 1. 나눔글 + 이미지 등록 */
     @Test
     @Order(1)
     @DisplayName("나눔글 + 이미지 등록")
@@ -46,7 +45,7 @@ public class SharingWriteServiceTest {
         List<MultipartFile> fileList = List.of(file1, file2);
 
         SharingRequest request = SharingRequest.builder()
-                .memberId(1L)           // DB에 있는 member_id
+                .memberId(1L)
                 .title("테스트 글")
                 .content("테스트 내용")
                 .plantType("다육이")
@@ -58,7 +57,6 @@ public class SharingWriteServiceTest {
         log.info("등록된 글 ID = {}", id);
     }
 
-    /** 2. 나눔글 수정 (이미지 변경 포함) */
     @Test
     @Order(2)
     @DisplayName("나눔글 수정")
@@ -72,8 +70,8 @@ public class SharingWriteServiceTest {
         );
 
         SharingRequest request = SharingRequest.builder()
-                .sharingId(3L)           // DB에 있는 sharing_id
-                .memberId(1L)            // DB에 있는 member_id
+                .sharingId(3L)
+                .memberId(1L)
                 .title("수정된 제목")
                 .content("수정된 내용")
                 .plantType("다육이")
@@ -85,15 +83,13 @@ public class SharingWriteServiceTest {
         log.info("수정 결과 = {}", result);
     }
 
-    /** 3. 나눔글 삭제 */
     @Test
     @Order(3)
     @DisplayName("나눔글 삭제")
     void deleteSharingTest() {
-        log.info("삭제 결과 = {}", sharingWriteService.deleteSharing(3L, 1L)); // DB 기준
+        log.info("삭제 결과 = {}", sharingWriteService.deleteSharing(3L, 1L));
     }
 
-    /** 4. 관심 등록 */
     @Test
     @Order(4)
     @DisplayName("관심 등록")
@@ -101,7 +97,6 @@ public class SharingWriteServiceTest {
         log.info("관심 등록 결과 = {}", sharingWriteService.addInterest(1L, 1L));
     }
 
-    /** 5. 관심 해제 */
     @Test
     @Order(5)
     @DisplayName("관심 해제")
@@ -109,27 +104,25 @@ public class SharingWriteServiceTest {
         log.info("관심 해제 결과 = {}", sharingWriteService.removeInterest(3L, 12L));
     }
 
-    /** 6. 댓글 등록 */
     @Test
     @Order(6)
     @DisplayName("댓글 등록")
     void addCommentTest() {
         CommentRequest request = CommentRequest.builder()
-                .commentId(1L)           // DB에 있는 comment_id
-                .sharingId(3L)           // DB에 있는 sharing_id
-                .writerId(2L)            // DB에 있는 writer_id
+                .commentId(1L)
+                .sharingId(3L)
+                .writerId(2L)
                 .content("댓글")
                 .build();
         log.info("댓글 등록 결과 = {}", sharingWriteService.addComment(request));
     }
 
-    /** 7. 댓글 수정 */
     @Test
     @Order(7)
     @DisplayName("댓글 수정")
     void updateCommentTest() {
         CommentRequest request = CommentRequest.builder()
-                .commentId(1L)           // DB 기준
+                .commentId(1L)
                 .sharingId(1L)
                 .writerId(2L)
                 .content("수정된 댓글")
@@ -137,7 +130,6 @@ public class SharingWriteServiceTest {
         log.info("댓글 수정 결과 = {}", sharingWriteService.updateComment(request));
     }
 
-    /** 8. 댓글 삭제 */
     @Test
     @Order(8)
     @DisplayName("댓글 삭제")

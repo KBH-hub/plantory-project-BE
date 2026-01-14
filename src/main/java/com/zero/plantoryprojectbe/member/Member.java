@@ -78,7 +78,7 @@ public class Member {
     }
 
     public void softDeleteNow() {
-        this.delFlag = LocalDateTime.now(); // delFlag가 LocalDateTime인 경우
+        this.delFlag = LocalDateTime.now();
     }
 
     public static Member create(String membername, String password) {

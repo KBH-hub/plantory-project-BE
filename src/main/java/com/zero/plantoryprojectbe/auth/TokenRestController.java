@@ -53,7 +53,7 @@ public class TokenRestController {
             summary = "Refresh Token 삭제(로그아웃 보조)",
             description = "인증된 사용자의 refresh token을 서버 저장소에서 삭제합니다."
     )
-    @SecurityRequirement(name = "bearerAuth") // 전역이면 생략 가능
+    @SecurityRequirement(name = "bearerAuth")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "삭제 성공"),
             @ApiResponse(responseCode = "401", description = "인증 필요(JWT 누락/만료)"),
