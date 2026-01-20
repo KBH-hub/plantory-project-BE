@@ -6,7 +6,7 @@
 - 식물을 주제로 한 커뮤니티 - 지역 무료 식물 나눔 커뮤니티, 질문 커뮤니티 
 - 식물 사전 - 실내 식물 사전, 건조 식물 사전/ 나의 식물 - 식물 캘린더, 내 식물 관리
 
-**  🔧 리팩토링 내용 **
+**🔧 리팩토링 내용**
   - UI서버 분리
   - TypeScript 기반 React 적용
 
@@ -37,4 +37,5 @@
 
 # 🖥 프로젝트 주요 화연
 <img width="1022" height="528" alt="image" src="https://github.com/user-attachments/assets/990fa4bf-e645-4ee1-b79c-36948f627eec" />
+
 
