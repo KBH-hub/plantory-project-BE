@@ -2,10 +2,19 @@ spring:
   application:
     name: plantory-project-BE
 
+#  cloud:
+#    gcp:
+#      storage:
+#        project-id: logical-voyage-477015-j4
   cloud:
-    gcp:
-      storage:
-        project-id: logical-voyage-477015-j4
+    aws:
+      s3:
+        bucket: ${S3_BUCKET_NAME}
+      region:
+        static: ${AWS_REGION}
+      credentials:
+        access-key: ${AWS_ACCESS_KEY_ID}
+        secret-key: ${AWS_SECRET_ACCESS_KEY}
 
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver

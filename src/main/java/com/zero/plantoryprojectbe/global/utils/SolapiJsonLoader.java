@@ -14,7 +14,7 @@ public class SolapiJsonLoader {
 
     @Bean
     public SolapiConfig solapiConfig() throws Exception {
-        String path = System.getenv("SOLAPI_JSON_PATH");
+        String path = System.getProperty("SOLAPI_JSON_PATH");
         if (path == null || path.isBlank()) {
             throw new IllegalStateException("환경변수 SOLAPI_JSON_PATH 미설정");
         }
